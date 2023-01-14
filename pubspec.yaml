@@ -1,10 +1,10 @@
 name: voting_app
 description: A smart voting application built on top of the krapi blockchain.
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.18.2 <3.0.0'
+  sdk: ">=2.18.2 <3.0.0"
 dependencies:
   flutter:
     sdk: flutter
@@ -12,7 +12,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^1.1.6
   google_fonts: ^3.0.1
-  supabase_flutter: ^1.2.2
+  supabase_flutter:
+    git:
+      url: https://github.com/krapiOrg/supabase-flutter/
   enum_to_string: ^2.0.1
   file_picker: ^5.2.5
   path: ^1.8.2
