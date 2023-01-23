@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
 import 'package:voting_app/constants/env.dart';
-import 'package:voting_app/constants/routes.dart';
-import 'package:voting_app/role.dart';
-import 'package:voting_app/screens/home_screen.dart';
-import 'package:voting_app/screens/signin_screen.dart';
-import 'package:voting_app/screens/splash.dart';
+
+import 'router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,18 +15,29 @@ Future<void> main() async {
     debug: true,
   );
 
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(title: "K-Vote", initialRoute: '/', routes: {
-      splashScreenRoute: (context) => const SplashScreen(),
-      signInScreenRoute: (context) => const SignInScreen(),
-      homeScreenRoute: (context) => const HomeScreen(),
-    });
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
+    return ScreenUtilInit(
+      minTextAdapt: true,
+      designSize: const Size(1080, 1920),
+      builder: (context, child) {
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'K-Vote',
+          routerConfig: router,
+        );
+      },
+    );
   }
 }

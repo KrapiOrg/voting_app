@@ -1,131 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:voting_app/constants/routes.dart';
-import 'package:voting_app/providers/auth/supabase_auth_provider.dart';
-import 'package:voting_app/constants/colours.dart';
-import 'package:voting_app/widgets/krapi_text_button.dart';
-import 'package:voting_app/widgets/krapi_text_field.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SignInScreen extends StatefulWidget {
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:voting_app/auth/auth_manager.dart';
+import 'package:voting_app/constants/colours.dart';
+import 'package:voting_app/widgets/kvote_explainer.dart';
+import 'package:voting_app/widgets/text_button.dart';
+import 'package:voting_app/widgets/text_field.dart';
+
+class SignInScreen extends HookConsumerWidget {
   const SignInScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
-}
-
-class _SignInScreenState extends State<SignInScreen> {
-  late final TextEditingController _electionidController;
-  late final TextEditingController _passwordController;
-
-  Future<void> _signIn() async {
-    final email = _electionidController.text;
-    final password = _passwordController.text;
-
-    SupabaseAuthProvider provider = SupabaseAuthProvider();
-
-    await provider.signIn(electionid: email, password: password);
-  }
-
-  @override
-  void initState() {
-    _electionidController = TextEditingController();
-    _passwordController = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _electionidController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final electionIdController = useTextEditingController();
+    ref.listen(
+      authManagerProvider,
+      (before, after) {
+        after.whenOrNull(
+          error: (errorText) {
+            ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+              SnackBar(
+                content: Text(
+                  errorText,
+                  style: const TextStyle(
+                    color: Colors.redAccent,
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+    return Scaffold(
       backgroundColor: backGroundColour,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(Icons.arrow_back),
-                ),
-                Text(
-                  "Sign in",
-                  style: iconTextStyle,
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            SvgPicture.asset('assets/svg/logo_edited.svg'),
-            Text('K-Vote', style: logoTextStyle),
-            const SizedBox(height: 10),
-            Container(
-              decoration: BoxDecoration(
-                  color: fillColour1, borderRadius: BorderRadius.circular(15)),
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 50),
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    KrapiTextField(
-                      upperLabel: "Enter your Election ID",
-                      labelTextStyle: labelTextStyle1,
-                      textField: TextField(
-                        obscureText: false,
-                        controller: _electionidController,
-                        enabled: true,
-                        decoration: InputDecoration(
-                          fillColor: backGroundColour,
-                          hintText: "Election ID",
-                          hintStyle: hintTextStyle1,
-                          filled: true,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                      ),
-                    ),
-                    KrapiTextField(
-                        upperLabel: "Enter your password",
-                        labelTextStyle: labelTextStyle1,
-                        textField: TextField(
-                            obscureText: true,
-                            controller: _passwordController,
-                            enabled: true,
-                            decoration: InputDecoration(
-                              fillColor: backGroundColour,
-                              hintText: "Password",
-                              hintStyle: hintTextStyle1,
-                              filled: true,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                            ))),
-                  ]),
-            ),
-            const SizedBox(height: 10),
-            KrapiTextButton(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: fillColour1,
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const KVoteExplainer(),
+              Container(
                 width: 400,
-                text: "Sign In",
+                decoration: BoxDecoration(
+                  color: fillColour1,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 50),
+                child: ElectionIdInputField(controller: electionIdController),
+              ),
+              SizedBox(height: 0.01.sh),
+              KTextButton(
+                width: 400,
+                text: 'Sign In',
                 onTap: () async {
-                  await _signIn();
-
-                  if (!mounted) return;
-
-                  Navigator.of(context).pushNamed(
-                    homeScreenRoute,
-                  );
-                }),
-          ],
+                  final manager = ref.read(authManagerProvider.notifier);
+                  manager.signIn(electionIdController.text);
+                },
+              ),
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }

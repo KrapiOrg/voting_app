@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 //Colours
@@ -17,49 +18,40 @@ const loginSignUpHelpTextColour = Color.fromRGBO(21, 45, 53, 1);
 
 //Text Style
 final logoTextStyle = GoogleFonts.poppins(
-    fontSize: 30, fontWeight: FontWeight.w600, fontStyle: FontStyle.normal);
+  fontSize: 75.sp,
+  fontWeight: FontWeight.w600,
+  fontStyle: FontStyle.normal,
+);
 
-final headerTextStyle = GoogleFonts.poppins(
-    fontSize: 20, fontWeight: FontWeight.w600, fontStyle: FontStyle.normal);
+final headerTextStyle = GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.w600, fontStyle: FontStyle.normal);
 
 final paragraphTextStyle = GoogleFonts.poppins(
-    color: paragraphTextColour,
-    fontSize: 15,
-    fontWeight: FontWeight.w600,
-    fontStyle: FontStyle.normal);
+    color: paragraphTextColour, fontSize: 15, fontWeight: FontWeight.w600, fontStyle: FontStyle.normal);
 
-final buttonTextStyle = GoogleFonts.poppins(
-    fontSize: 20, fontWeight: FontWeight.w600, fontStyle: FontStyle.normal);
+final buttonTextStyle = GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.w600, fontStyle: FontStyle.normal);
 
 final labelTextStyle1 = GoogleFonts.poppins(
-    color: labelTextColour1,
-    fontSize: 14,
-    fontWeight: FontWeight.w400,
-    fontStyle: FontStyle.normal);
+  color: labelTextColour1,
+  fontSize: 35.sp,
+  fontWeight: FontWeight.w400,
+  fontStyle: FontStyle.normal,
+);
 
 final labelTextStyle2 = GoogleFonts.poppins(
-    color: labelTextColour2,
-    fontSize: 14,
-    fontWeight: FontWeight.w400,
-    fontStyle: FontStyle.normal);
+  color: labelTextColour2,
+  fontSize: 35.sp,
+  fontWeight: FontWeight.w400,
+  fontStyle: FontStyle.normal,
+);
 
-final hintTextStyle1 = GoogleFonts.poppins(
-    color: hintTextColour1,
-    fontSize: 16,
-    fontWeight: FontWeight.w400,
-    fontStyle: FontStyle.normal);
+final hintTextStyle1 =
+    GoogleFonts.poppins(color: hintTextColour1, fontSize: 16, fontWeight: FontWeight.w400, fontStyle: FontStyle.normal);
 
-final hintTextStyle2 = GoogleFonts.poppins(
-    color: hintTextColour2,
-    fontSize: 16,
-    fontWeight: FontWeight.w400,
-    fontStyle: FontStyle.normal);
+final hintTextStyle2 =
+    GoogleFonts.poppins(color: hintTextColour2, fontSize: 16, fontWeight: FontWeight.w400, fontStyle: FontStyle.normal);
 
-final iconTextStyle = GoogleFonts.poppins(
-    color: iconTextColour,
-    fontSize: 24,
-    fontWeight: FontWeight.w600,
-    fontStyle: FontStyle.normal);
+final iconTextStyle =
+    GoogleFonts.poppins(color: iconTextColour, fontSize: 24, fontWeight: FontWeight.w600, fontStyle: FontStyle.normal);
 
 final loginSignUpHelpTextStyle = GoogleFonts.poppins(
     color: loginSignUpHelpTextColour,
