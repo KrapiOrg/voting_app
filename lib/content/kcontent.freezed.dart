@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'post_content.dart';
+part of 'kcontent.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,56 +14,56 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-PostContent _$PostContentFromJson(Map<String, dynamic> json) {
+KContent _$KContentFromJson(Map<String, dynamic> json) {
   switch (json['type']) {
     case 'text':
-      return _PostContentKrapiText.fromJson(json);
+      return _KContentKrapiText.fromJson(json);
     case 'image':
-      return _PostContentKrapiImage.fromJson(json);
+      return _KContentKrapiImage.fromJson(json);
 
     default:
       throw CheckedFromJsonException(
-          json, 'type', 'PostContent', 'Invalid union type "${json['type']}"!');
+          json, 'type', 'KContent', 'Invalid union type "${json['type']}"!');
   }
 }
 
 /// @nodoc
-mixin _$PostContent {
+mixin _$KContent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text) text,
-    required TResult Function(String link) image,
+    required TResult Function(String imageLink) image,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text)? text,
-    TResult? Function(String link)? image,
+    TResult? Function(String imageLink)? image,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text)? text,
-    TResult Function(String link)? image,
+    TResult Function(String imageLink)? image,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PostContentKrapiText value) text,
-    required TResult Function(_PostContentKrapiImage value) image,
+    required TResult Function(_KContentKrapiText value) text,
+    required TResult Function(_KContentKrapiImage value) image,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_PostContentKrapiText value)? text,
-    TResult? Function(_PostContentKrapiImage value)? image,
+    TResult? Function(_KContentKrapiText value)? text,
+    TResult? Function(_KContentKrapiImage value)? image,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PostContentKrapiText value)? text,
-    TResult Function(_PostContentKrapiImage value)? image,
+    TResult Function(_KContentKrapiText value)? text,
+    TResult Function(_KContentKrapiImage value)? image,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -71,16 +71,15 @@ mixin _$PostContent {
 }
 
 /// @nodoc
-abstract class $PostContentCopyWith<$Res> {
-  factory $PostContentCopyWith(
-          PostContent value, $Res Function(PostContent) then) =
-      _$PostContentCopyWithImpl<$Res, PostContent>;
+abstract class $KContentCopyWith<$Res> {
+  factory $KContentCopyWith(KContent value, $Res Function(KContent) then) =
+      _$KContentCopyWithImpl<$Res, KContent>;
 }
 
 /// @nodoc
-class _$PostContentCopyWithImpl<$Res, $Val extends PostContent>
-    implements $PostContentCopyWith<$Res> {
-  _$PostContentCopyWithImpl(this._value, this._then);
+class _$KContentCopyWithImpl<$Res, $Val extends KContent>
+    implements $KContentCopyWith<$Res> {
+  _$KContentCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -89,20 +88,20 @@ class _$PostContentCopyWithImpl<$Res, $Val extends PostContent>
 }
 
 /// @nodoc
-abstract class _$$_PostContentKrapiTextCopyWith<$Res> {
-  factory _$$_PostContentKrapiTextCopyWith(_$_PostContentKrapiText value,
-          $Res Function(_$_PostContentKrapiText) then) =
-      __$$_PostContentKrapiTextCopyWithImpl<$Res>;
+abstract class _$$_KContentKrapiTextCopyWith<$Res> {
+  factory _$$_KContentKrapiTextCopyWith(_$_KContentKrapiText value,
+          $Res Function(_$_KContentKrapiText) then) =
+      __$$_KContentKrapiTextCopyWithImpl<$Res>;
   @useResult
   $Res call({String text});
 }
 
 /// @nodoc
-class __$$_PostContentKrapiTextCopyWithImpl<$Res>
-    extends _$PostContentCopyWithImpl<$Res, _$_PostContentKrapiText>
-    implements _$$_PostContentKrapiTextCopyWith<$Res> {
-  __$$_PostContentKrapiTextCopyWithImpl(_$_PostContentKrapiText _value,
-      $Res Function(_$_PostContentKrapiText) _then)
+class __$$_KContentKrapiTextCopyWithImpl<$Res>
+    extends _$KContentCopyWithImpl<$Res, _$_KContentKrapiText>
+    implements _$$_KContentKrapiTextCopyWith<$Res> {
+  __$$_KContentKrapiTextCopyWithImpl(
+      _$_KContentKrapiText _value, $Res Function(_$_KContentKrapiText) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -110,7 +109,7 @@ class __$$_PostContentKrapiTextCopyWithImpl<$Res>
   $Res call({
     Object? text = null,
   }) {
-    return _then(_$_PostContentKrapiText(
+    return _then(_$_KContentKrapiText(
       null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -121,12 +120,12 @@ class __$$_PostContentKrapiTextCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PostContentKrapiText implements _PostContentKrapiText {
-  const _$_PostContentKrapiText(this.text, {final String? $type})
+class _$_KContentKrapiText implements _KContentKrapiText {
+  const _$_KContentKrapiText(this.text, {final String? $type})
       : $type = $type ?? 'text';
 
-  factory _$_PostContentKrapiText.fromJson(Map<String, dynamic> json) =>
-      _$$_PostContentKrapiTextFromJson(json);
+  factory _$_KContentKrapiText.fromJson(Map<String, dynamic> json) =>
+      _$$_KContentKrapiTextFromJson(json);
 
   @override
   final String text;
@@ -136,14 +135,14 @@ class _$_PostContentKrapiText implements _PostContentKrapiText {
 
   @override
   String toString() {
-    return 'PostContent.text(text: $text)';
+    return 'KContent.text(text: $text)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PostContentKrapiText &&
+            other is _$_KContentKrapiText &&
             (identical(other.text, text) || other.text == text));
   }
 
@@ -154,15 +153,15 @@ class _$_PostContentKrapiText implements _PostContentKrapiText {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PostContentKrapiTextCopyWith<_$_PostContentKrapiText> get copyWith =>
-      __$$_PostContentKrapiTextCopyWithImpl<_$_PostContentKrapiText>(
+  _$$_KContentKrapiTextCopyWith<_$_KContentKrapiText> get copyWith =>
+      __$$_KContentKrapiTextCopyWithImpl<_$_KContentKrapiText>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text) text,
-    required TResult Function(String link) image,
+    required TResult Function(String imageLink) image,
   }) {
     return text(this.text);
   }
@@ -171,7 +170,7 @@ class _$_PostContentKrapiText implements _PostContentKrapiText {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text)? text,
-    TResult? Function(String link)? image,
+    TResult? Function(String imageLink)? image,
   }) {
     return text?.call(this.text);
   }
@@ -180,7 +179,7 @@ class _$_PostContentKrapiText implements _PostContentKrapiText {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text)? text,
-    TResult Function(String link)? image,
+    TResult Function(String imageLink)? image,
     required TResult orElse(),
   }) {
     if (text != null) {
@@ -192,8 +191,8 @@ class _$_PostContentKrapiText implements _PostContentKrapiText {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PostContentKrapiText value) text,
-    required TResult Function(_PostContentKrapiImage value) image,
+    required TResult Function(_KContentKrapiText value) text,
+    required TResult Function(_KContentKrapiImage value) image,
   }) {
     return text(this);
   }
@@ -201,8 +200,8 @@ class _$_PostContentKrapiText implements _PostContentKrapiText {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_PostContentKrapiText value)? text,
-    TResult? Function(_PostContentKrapiImage value)? image,
+    TResult? Function(_KContentKrapiText value)? text,
+    TResult? Function(_KContentKrapiImage value)? image,
   }) {
     return text?.call(this);
   }
@@ -210,8 +209,8 @@ class _$_PostContentKrapiText implements _PostContentKrapiText {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PostContentKrapiText value)? text,
-    TResult Function(_PostContentKrapiImage value)? image,
+    TResult Function(_KContentKrapiText value)? text,
+    TResult Function(_KContentKrapiImage value)? image,
     required TResult orElse(),
   }) {
     if (text != null) {
@@ -222,51 +221,50 @@ class _$_PostContentKrapiText implements _PostContentKrapiText {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PostContentKrapiTextToJson(
+    return _$$_KContentKrapiTextToJson(
       this,
     );
   }
 }
 
-abstract class _PostContentKrapiText implements PostContent {
-  const factory _PostContentKrapiText(final String text) =
-      _$_PostContentKrapiText;
+abstract class _KContentKrapiText implements KContent {
+  const factory _KContentKrapiText(final String text) = _$_KContentKrapiText;
 
-  factory _PostContentKrapiText.fromJson(Map<String, dynamic> json) =
-      _$_PostContentKrapiText.fromJson;
+  factory _KContentKrapiText.fromJson(Map<String, dynamic> json) =
+      _$_KContentKrapiText.fromJson;
 
   String get text;
   @JsonKey(ignore: true)
-  _$$_PostContentKrapiTextCopyWith<_$_PostContentKrapiText> get copyWith =>
+  _$$_KContentKrapiTextCopyWith<_$_KContentKrapiText> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_PostContentKrapiImageCopyWith<$Res> {
-  factory _$$_PostContentKrapiImageCopyWith(_$_PostContentKrapiImage value,
-          $Res Function(_$_PostContentKrapiImage) then) =
-      __$$_PostContentKrapiImageCopyWithImpl<$Res>;
+abstract class _$$_KContentKrapiImageCopyWith<$Res> {
+  factory _$$_KContentKrapiImageCopyWith(_$_KContentKrapiImage value,
+          $Res Function(_$_KContentKrapiImage) then) =
+      __$$_KContentKrapiImageCopyWithImpl<$Res>;
   @useResult
-  $Res call({String link});
+  $Res call({String imageLink});
 }
 
 /// @nodoc
-class __$$_PostContentKrapiImageCopyWithImpl<$Res>
-    extends _$PostContentCopyWithImpl<$Res, _$_PostContentKrapiImage>
-    implements _$$_PostContentKrapiImageCopyWith<$Res> {
-  __$$_PostContentKrapiImageCopyWithImpl(_$_PostContentKrapiImage _value,
-      $Res Function(_$_PostContentKrapiImage) _then)
+class __$$_KContentKrapiImageCopyWithImpl<$Res>
+    extends _$KContentCopyWithImpl<$Res, _$_KContentKrapiImage>
+    implements _$$_KContentKrapiImageCopyWith<$Res> {
+  __$$_KContentKrapiImageCopyWithImpl(
+      _$_KContentKrapiImage _value, $Res Function(_$_KContentKrapiImage) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? link = null,
+    Object? imageLink = null,
   }) {
-    return _then(_$_PostContentKrapiImage(
-      null == link
-          ? _value.link
-          : link // ignore: cast_nullable_to_non_nullable
+    return _then(_$_KContentKrapiImage(
+      null == imageLink
+          ? _value.imageLink
+          : imageLink // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -274,70 +272,71 @@ class __$$_PostContentKrapiImageCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PostContentKrapiImage implements _PostContentKrapiImage {
-  const _$_PostContentKrapiImage(this.link, {final String? $type})
+class _$_KContentKrapiImage implements _KContentKrapiImage {
+  const _$_KContentKrapiImage(this.imageLink, {final String? $type})
       : $type = $type ?? 'image';
 
-  factory _$_PostContentKrapiImage.fromJson(Map<String, dynamic> json) =>
-      _$$_PostContentKrapiImageFromJson(json);
+  factory _$_KContentKrapiImage.fromJson(Map<String, dynamic> json) =>
+      _$$_KContentKrapiImageFromJson(json);
 
   @override
-  final String link;
+  final String imageLink;
 
   @JsonKey(name: 'type')
   final String $type;
 
   @override
   String toString() {
-    return 'PostContent.image(link: $link)';
+    return 'KContent.image(imageLink: $imageLink)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PostContentKrapiImage &&
-            (identical(other.link, link) || other.link == link));
+            other is _$_KContentKrapiImage &&
+            (identical(other.imageLink, imageLink) ||
+                other.imageLink == imageLink));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, link);
+  int get hashCode => Object.hash(runtimeType, imageLink);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PostContentKrapiImageCopyWith<_$_PostContentKrapiImage> get copyWith =>
-      __$$_PostContentKrapiImageCopyWithImpl<_$_PostContentKrapiImage>(
+  _$$_KContentKrapiImageCopyWith<_$_KContentKrapiImage> get copyWith =>
+      __$$_KContentKrapiImageCopyWithImpl<_$_KContentKrapiImage>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text) text,
-    required TResult Function(String link) image,
+    required TResult Function(String imageLink) image,
   }) {
-    return image(link);
+    return image(imageLink);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text)? text,
-    TResult? Function(String link)? image,
+    TResult? Function(String imageLink)? image,
   }) {
-    return image?.call(link);
+    return image?.call(imageLink);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text)? text,
-    TResult Function(String link)? image,
+    TResult Function(String imageLink)? image,
     required TResult orElse(),
   }) {
     if (image != null) {
-      return image(link);
+      return image(imageLink);
     }
     return orElse();
   }
@@ -345,8 +344,8 @@ class _$_PostContentKrapiImage implements _PostContentKrapiImage {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PostContentKrapiText value) text,
-    required TResult Function(_PostContentKrapiImage value) image,
+    required TResult Function(_KContentKrapiText value) text,
+    required TResult Function(_KContentKrapiImage value) image,
   }) {
     return image(this);
   }
@@ -354,8 +353,8 @@ class _$_PostContentKrapiImage implements _PostContentKrapiImage {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_PostContentKrapiText value)? text,
-    TResult? Function(_PostContentKrapiImage value)? image,
+    TResult? Function(_KContentKrapiText value)? text,
+    TResult? Function(_KContentKrapiImage value)? image,
   }) {
     return image?.call(this);
   }
@@ -363,8 +362,8 @@ class _$_PostContentKrapiImage implements _PostContentKrapiImage {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PostContentKrapiText value)? text,
-    TResult Function(_PostContentKrapiImage value)? image,
+    TResult Function(_KContentKrapiText value)? text,
+    TResult Function(_KContentKrapiImage value)? image,
     required TResult orElse(),
   }) {
     if (image != null) {
@@ -375,21 +374,21 @@ class _$_PostContentKrapiImage implements _PostContentKrapiImage {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PostContentKrapiImageToJson(
+    return _$$_KContentKrapiImageToJson(
       this,
     );
   }
 }
 
-abstract class _PostContentKrapiImage implements PostContent {
-  const factory _PostContentKrapiImage(final String link) =
-      _$_PostContentKrapiImage;
+abstract class _KContentKrapiImage implements KContent {
+  const factory _KContentKrapiImage(final String imageLink) =
+      _$_KContentKrapiImage;
 
-  factory _PostContentKrapiImage.fromJson(Map<String, dynamic> json) =
-      _$_PostContentKrapiImage.fromJson;
+  factory _KContentKrapiImage.fromJson(Map<String, dynamic> json) =
+      _$_KContentKrapiImage.fromJson;
 
-  String get link;
+  String get imageLink;
   @JsonKey(ignore: true)
-  _$$_PostContentKrapiImageCopyWith<_$_PostContentKrapiImage> get copyWith =>
+  _$$_KContentKrapiImageCopyWith<_$_KContentKrapiImage> get copyWith =>
       throw _privateConstructorUsedError;
 }

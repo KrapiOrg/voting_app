@@ -31,6 +31,11 @@ dependencies:
   auto_size_text: ^3.0.0
   dartz: ^0.10.1
   sliver_tools: ^0.2.8
+  readmore: ^2.2.0
+  faker: ^2.1.0
+  intl: ^0.18.0
+  like_button: ^2.0.5
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:

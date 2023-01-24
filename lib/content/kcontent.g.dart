@@ -1,35 +1,34 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'post_content.dart';
+part of 'kcontent.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PostContentKrapiText _$$_PostContentKrapiTextFromJson(
-        Map<String, dynamic> json) =>
-    _$_PostContentKrapiText(
+_$_KContentKrapiText _$$_KContentKrapiTextFromJson(Map<String, dynamic> json) =>
+    _$_KContentKrapiText(
       json['text'] as String,
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$_PostContentKrapiTextToJson(
-        _$_PostContentKrapiText instance) =>
+Map<String, dynamic> _$$_KContentKrapiTextToJson(
+        _$_KContentKrapiText instance) =>
     <String, dynamic>{
       'text': instance.text,
       'type': instance.$type,
     };
 
-_$_PostContentKrapiImage _$$_PostContentKrapiImageFromJson(
+_$_KContentKrapiImage _$$_KContentKrapiImageFromJson(
         Map<String, dynamic> json) =>
-    _$_PostContentKrapiImage(
-      json['link'] as String,
+    _$_KContentKrapiImage(
+      json['image_link'] as String,
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$_PostContentKrapiImageToJson(
-        _$_PostContentKrapiImage instance) =>
+Map<String, dynamic> _$$_KContentKrapiImageToJson(
+        _$_KContentKrapiImage instance) =>
     <String, dynamic>{
-      'link': instance.link,
+      'image_link': instance.imageLink,
       'type': instance.$type,
     };

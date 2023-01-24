@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:voting_app/auth/auth_manager.dart';
 import 'package:voting_app/models/auth_state/auth_state.dart';
-import 'package:voting_app/screens/campaign_screen.dart';
+import 'package:voting_app/screens/campaign_screen/campaign_screen.dart';
 import 'package:voting_app/screens/candidate_list_screen.dart';
 import 'package:voting_app/utils/go_router_refresh_stream.dart';
 
