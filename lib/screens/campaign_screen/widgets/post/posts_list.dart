@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-import 'campaign_post.dart';
+import 'post.dart';
 
 class CampaignPostsList extends StatelessWidget {
   const CampaignPostsList({

@@ -4,10 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../campaign_providers.dart';
+import 'comment_providers.dart';
 
-class CampaignPostCommentsCount extends ConsumerWidget {
-  const CampaignPostCommentsCount({
+class CommentsCount extends ConsumerWidget {
+  const CommentsCount({
     Key? key,
     required this.postId,
   }) : super(key: key);

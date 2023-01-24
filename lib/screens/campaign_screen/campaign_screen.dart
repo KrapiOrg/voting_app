@@ -9,7 +9,7 @@ import '../../models/user/user.dart';
 import '../../providers.dart';
 import 'campaign_providers.dart';
 import 'widgets/campagin_header.dart';
-import 'widgets/campaign_posts_list.dart';
+import 'widgets/post/posts_list.dart';
 
 class _CandidateCampaignScreen extends ConsumerWidget {
   const _CandidateCampaignScreen(this.candidate, {super.key});

@@ -1,14 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:voting_app/screens/campaign_screen/campaign_providers.dart';
 
-import 'comment_widget.dart';
+import 'comment/comment_providers.dart';
+import 'comment/comment_widget.dart';
 
-class CampaignPostPreviewComments extends ConsumerWidget {
-  const CampaignPostPreviewComments({
+class PreviewComments extends ConsumerWidget {
+  const PreviewComments({
     super.key,
     required this.postId,
   });
