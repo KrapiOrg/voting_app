@@ -18,41 +18,36 @@ class CommentsCount extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final commentCount = ref.watch(commentCountProvider(postId));
 
-    return DefaultTextStyle(
-      style: DefaultTextStyle.of(context).style.copyWith(
-            fontSize: 35.sp,
-          ),
-      child: Row(
-        children: [
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 500),
-            child: commentCount.when(
-              data: (count) => Text(count),
-              loading: () => Shimmer.fromColors(
-                baseColor: Colors.grey[300]!,
-                highlightColor: Colors.grey[100]!,
-                child: SizedBox(
-                  width: 0.02.sw,
-                  height: 0.03.sh,
-                  child: const Card(),
-                ),
+    return Row(
+      children: [
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          child: commentCount.when(
+            data: (count) => Text(count),
+            loading: () => Shimmer.fromColors(
+              baseColor: Colors.grey[300]!,
+              highlightColor: Colors.grey[100]!,
+              child: SizedBox(
+                width: 0.02.sw,
+                height: 0.03.sh,
+                child: const Card(),
               ),
-              error: (_, __) {
-                print(_);
-                print(__);
-                return const Text('-1');
-              },
             ),
+            error: (_, __) {
+              print(_);
+              print(__);
+              return const Text('-1');
+            },
           ),
-          3.horizontalSpace,
-          Text(
-            'Comments',
-            style: GoogleFonts.poppins(
-              color: Colors.black.withOpacity(0.7),
-            ),
+        ),
+        3.horizontalSpace,
+        Text(
+          'Comments',
+          style: GoogleFonts.poppins(
+            color: Colors.black.withOpacity(0.7),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

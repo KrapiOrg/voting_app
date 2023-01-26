@@ -1,31 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:like_button/like_button.dart';
 
-class PostActions extends StatelessWidget {
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:voting_app/models/post/post.dart';
+import 'package:voting_app/screens/campaign_screen/widgets/post/comment/view_post_comments_action.dart';
+
+import 'comment/add_comment_action.dart';
+import 'reaction/action.dart';
+
+class PostActions extends ConsumerWidget {
   const PostActions({
     Key? key,
+    required this.post,
+    required this.ownerId,
+    required this.showViewCommentsAction,
   }) : super(key: key);
 
+  final KPost post;
+  final String ownerId;
+  final bool showViewCommentsAction;
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const Icon(
-          Icons.comment,
-          color: Colors.blue,
+        if (showViewCommentsAction)
+          ViewPostCommentsAction(
+            post: post,
+            ownerId: ownerId,
+          ),
+        ReactionAction(
+          postId: post.id,
+          ownerId: ownerId,
         ),
-        LikeButton(
-          likeBuilder: (bool isLiked) {
-            return Icon(
-              Icons.favorite,
-              color: isLiked ? Colors.deepPurpleAccent : Colors.grey,
-            );
-          },
-        ),
-        const Icon(
-          Icons.add_comment,
-          color: Colors.blue,
+        AddCommentAction(
+          postId: post.id,
+          ownerId: ownerId,
         ),
       ],
     );

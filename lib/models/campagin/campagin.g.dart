@@ -8,13 +8,13 @@ part of 'campagin.dart';
 
 _$_KCampaign _$$_KCampaignFromJson(Map<String, dynamic> json) => _$_KCampaign(
       json['id'] as String,
-      json['description'] as String,
-      (json['post_ids'] as List<dynamic>).map((e) => e as String).toList(),
+      json['slogan'] as String,
+      DateTime.parse(json['timestamp'] as String),
     );
 
 Map<String, dynamic> _$$_KCampaignToJson(_$_KCampaign instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'description': instance.description,
-      'post_ids': instance.postIds,
+      'slogan': instance.slogan,
+      'timestamp': instance.timestamp.toIso8601String(),
     };

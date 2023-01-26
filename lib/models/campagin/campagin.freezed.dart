@@ -21,8 +21,8 @@ KCampaign _$KCampaignFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$KCampaign {
   String get id => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  List<String> get postIds => throw _privateConstructorUsedError;
+  String get slogan => throw _privateConstructorUsedError;
+  DateTime get timestamp => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $KCampaignCopyWith<$Res> {
   factory $KCampaignCopyWith(KCampaign value, $Res Function(KCampaign) then) =
       _$KCampaignCopyWithImpl<$Res, KCampaign>;
   @useResult
-  $Res call({String id, String description, List<String> postIds});
+  $Res call({String id, String slogan, DateTime timestamp});
 }
 
 /// @nodoc
@@ -52,22 +52,22 @@ class _$KCampaignCopyWithImpl<$Res, $Val extends KCampaign>
   @override
   $Res call({
     Object? id = null,
-    Object? description = null,
-    Object? postIds = null,
+    Object? slogan = null,
+    Object? timestamp = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      slogan: null == slogan
+          ? _value.slogan
+          : slogan // ignore: cast_nullable_to_non_nullable
               as String,
-      postIds: null == postIds
-          ? _value.postIds
-          : postIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -79,7 +79,7 @@ abstract class _$$_KCampaignCopyWith<$Res> implements $KCampaignCopyWith<$Res> {
       __$$_KCampaignCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String description, List<String> postIds});
+  $Res call({String id, String slogan, DateTime timestamp});
 }
 
 /// @nodoc
@@ -94,22 +94,22 @@ class __$$_KCampaignCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? description = null,
-    Object? postIds = null,
+    Object? slogan = null,
+    Object? timestamp = null,
   }) {
     return _then(_$_KCampaign(
       null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      null == slogan
+          ? _value.slogan
+          : slogan // ignore: cast_nullable_to_non_nullable
               as String,
-      null == postIds
-          ? _value._postIds
-          : postIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -117,8 +117,7 @@ class __$$_KCampaignCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_KCampaign implements _KCampaign {
-  const _$_KCampaign(this.id, this.description, final List<String> postIds)
-      : _postIds = postIds;
+  const _$_KCampaign(this.id, this.slogan, this.timestamp);
 
   factory _$_KCampaign.fromJson(Map<String, dynamic> json) =>
       _$$_KCampaignFromJson(json);
@@ -126,18 +125,13 @@ class _$_KCampaign implements _KCampaign {
   @override
   final String id;
   @override
-  final String description;
-  final List<String> _postIds;
+  final String slogan;
   @override
-  List<String> get postIds {
-    if (_postIds is EqualUnmodifiableListView) return _postIds;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_postIds);
-  }
+  final DateTime timestamp;
 
   @override
   String toString() {
-    return 'KCampaign(id: $id, description: $description, postIds: $postIds)';
+    return 'KCampaign(id: $id, slogan: $slogan, timestamp: $timestamp)';
   }
 
   @override
@@ -146,15 +140,14 @@ class _$_KCampaign implements _KCampaign {
         (other.runtimeType == runtimeType &&
             other is _$_KCampaign &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            const DeepCollectionEquality().equals(other._postIds, _postIds));
+            (identical(other.slogan, slogan) || other.slogan == slogan) &&
+            (identical(other.timestamp, timestamp) ||
+                other.timestamp == timestamp));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, description,
-      const DeepCollectionEquality().hash(_postIds));
+  int get hashCode => Object.hash(runtimeType, id, slogan, timestamp);
 
   @JsonKey(ignore: true)
   @override
@@ -171,8 +164,9 @@ class _$_KCampaign implements _KCampaign {
 }
 
 abstract class _KCampaign implements KCampaign {
-  const factory _KCampaign(final String id, final String description,
-      final List<String> postIds) = _$_KCampaign;
+  const factory _KCampaign(
+          final String id, final String slogan, final DateTime timestamp) =
+      _$_KCampaign;
 
   factory _KCampaign.fromJson(Map<String, dynamic> json) =
       _$_KCampaign.fromJson;
@@ -180,9 +174,9 @@ abstract class _KCampaign implements KCampaign {
   @override
   String get id;
   @override
-  String get description;
+  String get slogan;
   @override
-  List<String> get postIds;
+  DateTime get timestamp;
   @override
   @JsonKey(ignore: true)
   _$$_KCampaignCopyWith<_$_KCampaign> get copyWith =>

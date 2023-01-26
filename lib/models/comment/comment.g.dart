@@ -8,11 +8,11 @@ part of 'comment.dart';
 
 _$_CommentText _$$_CommentTextFromJson(Map<String, dynamic> json) =>
     _$_CommentText(
-      json['id'] as String,
-      json['parent_id'] as String,
-      json['owner_id'] as String,
-      DateTime.parse(json['timestamp'] as String),
-      $enumDecode(_$CommentParentTypeEnumMap, json['parent_type']),
+      id: json['id'] as String,
+      parentId: json['parent_id'] as String,
+      ownerId: json['owner_id'] as String,
+      timestamp: DateTime.parse(json['timestamp'] as String),
+      parentType: $enumDecode(_$CommentParentTypeEnumMap, json['parent_type']),
     );
 
 Map<String, dynamic> _$$_CommentTextToJson(_$_CommentText instance) =>

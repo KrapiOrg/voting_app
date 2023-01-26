@@ -10,13 +10,13 @@ enum CommentParentType {
 
 @freezed
 class KComment with _$KComment {
-  const factory KComment(
-    String id,
-    String parentId,
-    String ownerId,
-    DateTime timestamp,
-    CommentParentType parentType,
-  ) = _CommentText;
+  const factory KComment({
+    required String id,
+    required String parentId,
+    required String ownerId,
+    required DateTime timestamp,
+    required CommentParentType parentType,
+  }) = _CommentText;
 
   factory KComment.fromJson(Map<String, dynamic> json) => _$KCommentFromJson(json);
 }

@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:voting_app/auth/auth_manager.dart';
 import 'package:voting_app/models/auth_state/auth_state.dart';
+import 'package:voting_app/models/post/post.dart';
 import 'package:voting_app/screens/campaign_screen/campaign_screen.dart';
+import 'package:voting_app/screens/campaign_screen/comments_screen/comments_screen.dart';
 import 'package:voting_app/screens/candidate_list_screen.dart';
 import 'package:voting_app/utils/go_router_refresh_stream.dart';
 
@@ -76,8 +78,14 @@ final routerProvider = Provider<GoRouter>(
               },
               routes: [
                 GoRoute(
-                  path: 'campaigns/:identity',
+                  path: ':identity/campaign',
                   builder: (_, gostate) => CampaignScreen(identity: gostate.params['identity']!),
+                  routes: [
+                    GoRoute(
+                      path: ':postId/comments',
+                      builder: (_, gostate) => PostCommentsScreen(post: gostate.extra as KPost),
+                    ),
+                  ],
                 ),
               ],
             )

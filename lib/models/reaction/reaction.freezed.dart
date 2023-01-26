@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'post.dart';
+part of 'reaction.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,33 +14,34 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-KPost _$KPostFromJson(Map<String, dynamic> json) {
-  return _KPost.fromJson(json);
+KReaction _$KReactionFromJson(Map<String, dynamic> json) {
+  return _KReaction.fromJson(json);
 }
 
 /// @nodoc
-mixin _$KPost {
-  String get id => throw _privateConstructorUsedError;
+mixin _$KReaction {
+  String get postId => throw _privateConstructorUsedError;
   String get ownerId => throw _privateConstructorUsedError;
   DateTime get timestamp => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $KPostCopyWith<KPost> get copyWith => throw _privateConstructorUsedError;
+  $KReactionCopyWith<KReaction> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $KPostCopyWith<$Res> {
-  factory $KPostCopyWith(KPost value, $Res Function(KPost) then) =
-      _$KPostCopyWithImpl<$Res, KPost>;
+abstract class $KReactionCopyWith<$Res> {
+  factory $KReactionCopyWith(KReaction value, $Res Function(KReaction) then) =
+      _$KReactionCopyWithImpl<$Res, KReaction>;
   @useResult
-  $Res call({String id, String ownerId, DateTime timestamp});
+  $Res call({String postId, String ownerId, DateTime timestamp});
 }
 
 /// @nodoc
-class _$KPostCopyWithImpl<$Res, $Val extends KPost>
-    implements $KPostCopyWith<$Res> {
-  _$KPostCopyWithImpl(this._value, this._then);
+class _$KReactionCopyWithImpl<$Res, $Val extends KReaction>
+    implements $KReactionCopyWith<$Res> {
+  _$KReactionCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -50,14 +51,14 @@ class _$KPostCopyWithImpl<$Res, $Val extends KPost>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? postId = null,
     Object? ownerId = null,
     Object? timestamp = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      postId: null == postId
+          ? _value.postId
+          : postId // ignore: cast_nullable_to_non_nullable
               as String,
       ownerId: null == ownerId
           ? _value.ownerId
@@ -72,37 +73,40 @@ class _$KPostCopyWithImpl<$Res, $Val extends KPost>
 }
 
 /// @nodoc
-abstract class _$$_KPostCopyWith<$Res> implements $KPostCopyWith<$Res> {
-  factory _$$_KPostCopyWith(_$_KPost value, $Res Function(_$_KPost) then) =
-      __$$_KPostCopyWithImpl<$Res>;
+abstract class _$$_KReactionCopyWith<$Res> implements $KReactionCopyWith<$Res> {
+  factory _$$_KReactionCopyWith(
+          _$_KReaction value, $Res Function(_$_KReaction) then) =
+      __$$_KReactionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String ownerId, DateTime timestamp});
+  $Res call({String postId, String ownerId, DateTime timestamp});
 }
 
 /// @nodoc
-class __$$_KPostCopyWithImpl<$Res> extends _$KPostCopyWithImpl<$Res, _$_KPost>
-    implements _$$_KPostCopyWith<$Res> {
-  __$$_KPostCopyWithImpl(_$_KPost _value, $Res Function(_$_KPost) _then)
+class __$$_KReactionCopyWithImpl<$Res>
+    extends _$KReactionCopyWithImpl<$Res, _$_KReaction>
+    implements _$$_KReactionCopyWith<$Res> {
+  __$$_KReactionCopyWithImpl(
+      _$_KReaction _value, $Res Function(_$_KReaction) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? postId = null,
     Object? ownerId = null,
     Object? timestamp = null,
   }) {
-    return _then(_$_KPost(
-      null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+    return _then(_$_KReaction(
+      postId: null == postId
+          ? _value.postId
+          : postId // ignore: cast_nullable_to_non_nullable
               as String,
-      null == ownerId
+      ownerId: null == ownerId
           ? _value.ownerId
           : ownerId // ignore: cast_nullable_to_non_nullable
               as String,
-      null == timestamp
+      timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -112,14 +116,15 @@ class __$$_KPostCopyWithImpl<$Res> extends _$KPostCopyWithImpl<$Res, _$_KPost>
 
 /// @nodoc
 @JsonSerializable()
-class _$_KPost implements _KPost {
-  const _$_KPost(this.id, this.ownerId, this.timestamp);
+class _$_KReaction implements _KReaction {
+  const _$_KReaction(
+      {required this.postId, required this.ownerId, required this.timestamp});
 
-  factory _$_KPost.fromJson(Map<String, dynamic> json) =>
-      _$$_KPostFromJson(json);
+  factory _$_KReaction.fromJson(Map<String, dynamic> json) =>
+      _$$_KReactionFromJson(json);
 
   @override
-  final String id;
+  final String postId;
   @override
   final String ownerId;
   @override
@@ -127,15 +132,15 @@ class _$_KPost implements _KPost {
 
   @override
   String toString() {
-    return 'KPost(id: $id, ownerId: $ownerId, timestamp: $timestamp)';
+    return 'KReaction(postId: $postId, ownerId: $ownerId, timestamp: $timestamp)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_KPost &&
-            (identical(other.id, id) || other.id == id) &&
+            other is _$_KReaction &&
+            (identical(other.postId, postId) || other.postId == postId) &&
             (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp));
@@ -143,37 +148,39 @@ class _$_KPost implements _KPost {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, ownerId, timestamp);
+  int get hashCode => Object.hash(runtimeType, postId, ownerId, timestamp);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_KPostCopyWith<_$_KPost> get copyWith =>
-      __$$_KPostCopyWithImpl<_$_KPost>(this, _$identity);
+  _$$_KReactionCopyWith<_$_KReaction> get copyWith =>
+      __$$_KReactionCopyWithImpl<_$_KReaction>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_KPostToJson(
+    return _$$_KReactionToJson(
       this,
     );
   }
 }
 
-abstract class _KPost implements KPost {
-  const factory _KPost(
-          final String id, final String ownerId, final DateTime timestamp) =
-      _$_KPost;
+abstract class _KReaction implements KReaction {
+  const factory _KReaction(
+      {required final String postId,
+      required final String ownerId,
+      required final DateTime timestamp}) = _$_KReaction;
 
-  factory _KPost.fromJson(Map<String, dynamic> json) = _$_KPost.fromJson;
+  factory _KReaction.fromJson(Map<String, dynamic> json) =
+      _$_KReaction.fromJson;
 
   @override
-  String get id;
+  String get postId;
   @override
   String get ownerId;
   @override
   DateTime get timestamp;
   @override
   @JsonKey(ignore: true)
-  _$$_KPostCopyWith<_$_KPost> get copyWith =>
+  _$$_KReactionCopyWith<_$_KReaction> get copyWith =>
       throw _privateConstructorUsedError;
 }

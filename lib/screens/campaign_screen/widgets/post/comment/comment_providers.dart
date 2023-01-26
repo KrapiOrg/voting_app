@@ -1,8 +1,7 @@
-
-import 'dart:async';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
+
 import 'package:voting_app/content/kcontent.dart';
 import 'package:voting_app/models/comment/comment.dart';
 
@@ -14,12 +13,19 @@ final commentCountProvider = FutureProvider.autoDispose.family<String, String>(
   },
 );
 
-final commentsStreamProvider = StreamProvider.autoDispose.family<KComment, String>(
-  (ref, parentId) async* {
-    final controller = StreamController<Map<String, dynamic>>.broadcast();
+class CommentsListController extends PagingController<DateTime, KComment> {
+  final String parentId;
 
-    final db = Supabase.instance.client;
-    final channel = db.channel('public:comments').on(
+  static final db = Supabase.instance.client;
+  static final epoch = DateTime.fromMillisecondsSinceEpoch(1640979000000);
+
+  late final RealtimeChannel channel;
+
+  CommentsListController(this.parentId) : super(firstPageKey: epoch) {
+    addPageRequestListener((pageKey) {
+      fetch(pageKey);
+    });
+    channel = db.channel('public:comments').on(
       RealtimeListenTypes.postgresChanges,
       ChannelFilter(
         event: 'INSERT',
@@ -28,18 +34,53 @@ final commentsStreamProvider = StreamProvider.autoDispose.family<KComment, Strin
         filter: 'parent_id=eq.$parentId',
       ),
       (payload, [ref]) {
-        controller.sink.add(payload);
+        print('Change received: ${payload.toString()}');
+        final realPayLoad = payload['new'] as Map<String, dynamic>;
+        final comment = KComment.fromJson(realPayLoad);
+        appendPage([comment], comment.timestamp);
       },
-    );
-    channel.subscribe();
+    )..subscribe();
+  }
 
-    ref.onDispose(() async {
-      await db.removeChannel(channel);
-    });
+  void fetch(DateTime key) async {
+    try {
+      final responses = await db
+          .from('comments')
+          .select<List<Map<String, dynamic>>>('*')
+          .eq('parent_id', parentId)
+          .filter('timestamp', 'gt', key)
+          .limit(10)
+          .order('timestamp', ascending: true);
 
-    await for (final event in controller.stream) {
-      yield KComment.fromJson(event);
+      final comments = <KComment>[];
+
+      for (final response in responses) {
+        comments.add(KComment.fromJson(response));
+      }
+
+      if (comments.isNotEmpty) {
+        appendPage(comments, comments.last.timestamp);
+      }
+    } catch (e, st) {
+      print(e);
+      print(st);
     }
+  }
+
+  @override
+  void dispose() async {
+    await db.removeChannel(channel);
+    super.dispose();
+  }
+}
+
+final commentsListProvider = Provider.autoDispose.family<CommentsListController, String>(
+  (ref, postId) {
+    final controller = CommentsListController(postId);
+    ref.onDispose(() {
+      controller.dispose();
+    });
+    return controller;
   },
 );
 

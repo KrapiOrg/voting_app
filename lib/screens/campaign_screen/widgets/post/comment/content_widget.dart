@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,8 +15,8 @@ class CommentContentWidget extends ConsumerWidget {
     final commentContent = ref.watch(commentContentProvider(commentId));
     return commentContent.when(
       data: (c) => c.when(
-        text: TextContentComment.new,
-        image: (_) => const SizedBox(),
+        text: (_, t) => TextContentComment(t),
+        image: (_, __) => const SizedBox(),
       ),
       loading: CommentLoading.new,
       error: (_, __) {

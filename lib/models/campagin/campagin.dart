@@ -7,8 +7,8 @@ part 'campagin.freezed.dart';
 class KCampaign with _$KCampaign {
   const factory KCampaign(
     String id,
-    String description,
-    List<String> postIds,
+    String slogan,
+    DateTime timestamp,
   ) = _KCampaign;
   factory KCampaign.fromJson(Map<String, dynamic> json) => _$KCampaignFromJson(json);
 }

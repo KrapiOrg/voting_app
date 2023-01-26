@@ -24,11 +24,10 @@ class _CandidateCampaignScreen extends ConsumerWidget {
       slivers: [
         campaignStream.when(
           data: (campaign) {
-            final postIds = campaign.postIds;
             return MultiSliver(
               children: [
                 CampaginHeader(candidate: candidate, campaign: campaign),
-                postIds.isEmpty ? const CampaginHasNoPostsWidget() : CampaignPostsList(postIds: postIds),
+                CampaignPostsList(campaign: campaign),
               ],
             );
           },

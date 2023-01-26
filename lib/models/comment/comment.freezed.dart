@@ -123,23 +123,23 @@ class __$$_CommentTextCopyWithImpl<$Res>
     Object? parentType = null,
   }) {
     return _then(_$_CommentText(
-      null == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      null == parentId
+      parentId: null == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as String,
-      null == ownerId
+      ownerId: null == ownerId
           ? _value.ownerId
           : ownerId // ignore: cast_nullable_to_non_nullable
               as String,
-      null == timestamp
+      timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      null == parentType
+      parentType: null == parentType
           ? _value.parentType
           : parentType // ignore: cast_nullable_to_non_nullable
               as CommentParentType,
@@ -151,7 +151,11 @@ class __$$_CommentTextCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_CommentText implements _CommentText {
   const _$_CommentText(
-      this.id, this.parentId, this.ownerId, this.timestamp, this.parentType);
+      {required this.id,
+      required this.parentId,
+      required this.ownerId,
+      required this.timestamp,
+      required this.parentType});
 
   factory _$_CommentText.fromJson(Map<String, dynamic> json) =>
       _$$_CommentTextFromJson(json);
@@ -208,11 +212,11 @@ class _$_CommentText implements _CommentText {
 
 abstract class _CommentText implements KComment {
   const factory _CommentText(
-      final String id,
-      final String parentId,
-      final String ownerId,
-      final DateTime timestamp,
-      final CommentParentType parentType) = _$_CommentText;
+      {required final String id,
+      required final String parentId,
+      required final String ownerId,
+      required final DateTime timestamp,
+      required final CommentParentType parentType}) = _$_CommentText;
 
   factory _CommentText.fromJson(Map<String, dynamic> json) =
       _$_CommentText.fromJson;

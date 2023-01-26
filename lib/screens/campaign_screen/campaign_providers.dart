@@ -3,15 +3,13 @@ import 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
 
 import '../../models/campagin/campagin.dart';
 
-final campaignProvider = StreamProvider.autoDispose.family<KCampaign, String>(
-  (ref, userId) async* {
+final campaignProvider = FutureProvider.autoDispose.family<KCampaign, String>(
+  (ref, userId) async {
     final db = Supabase.instance.client;
 
     try {
-      final stream = db.from('campaigns').stream(primaryKey: ['id']).limit(1).eq('id', userId);
-      await for (final change in stream) {
-        yield KCampaign.fromJson(change.first);
-      }
+      final response = await db.from('campaigns').select<Map<String, dynamic>>('*').match({'id': userId}).single();
+      return KCampaign.fromJson(response);
     } catch (e, st) {
       print(e.toString());
       print(st.toString());

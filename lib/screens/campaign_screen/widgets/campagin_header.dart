@@ -36,7 +36,7 @@ class CampaginHeader extends StatelessWidget {
               child: Card(
                 child: Center(
                   child: Text(
-                    campaign.description,
+                    campaign.slogan,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
                       fontSize: 100.sp,

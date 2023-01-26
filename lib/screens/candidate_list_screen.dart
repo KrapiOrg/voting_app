@@ -59,7 +59,7 @@ class CandidateListScreen extends ConsumerWidget {
                       KTextButton(
                         onTap: () {
                           final router = ref.read(routerProvider);
-                          router.push('/home/candidates/campaigns/${candidate.identity}');
+                          router.push('/home/candidates/${candidate.identity}/campaign');
                         },
                         text: 'Campaign',
                       ),
