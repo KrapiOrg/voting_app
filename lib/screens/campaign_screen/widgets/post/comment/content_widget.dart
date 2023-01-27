@@ -14,9 +14,9 @@ class CommentContentWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final commentContent = ref.watch(commentContentProvider(commentId));
     return commentContent.when(
-      data: (c) => c.when(
-        text: (_, t) => TextContentComment(t),
-        image: (_, __) => const SizedBox(),
+      data: (c) => c.map(
+        text: (content) => TextContentComment(content.text),
+        image: (_) => const SizedBox(),
       ),
       loading: CommentLoading.new,
       error: (_, __) => const SizedBox(),

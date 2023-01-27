@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
-import 'package:voting_app/content/kcontent.dart';
+import 'package:voting_app/models/content/kcontent.dart';
+
 import 'package:voting_app/models/post/post.dart';
 
 final postProvider = FutureProvider.autoDispose.family<KPost, String>(
@@ -32,24 +33,46 @@ class PostsListController extends PagingController<DateTime, KPost> {
   static final db = Supabase.instance.client;
   static final epoch = DateTime.fromMillisecondsSinceEpoch(1640979000000);
 
-  late final RealtimeChannel channel;
+  late final RealtimeChannel postContentsChannel;
+  late final RealtimeChannel postsChannel;
 
   PostsListController(this.ownerId) : super(firstPageKey: epoch) {
     addPageRequestListener((pageKey) {
       fetch(pageKey);
     });
-    channel = db.channel('public:posts').on(
+    postContentsChannel = db.channel('public:post_contents:owner_id=eq.$ownerId').on(
       RealtimeListenTypes.postgresChanges,
       ChannelFilter(
         event: 'INSERT',
+        schema: 'public',
+        table: 'post_contents',
+        filter: 'owner_id=eq.$ownerId',
+      ),
+      (payload, [ref]) async {
+        final content = KContent.fromJson(payload['new']);
+        final postResponse = await db
+            .from('posts')
+            .select<Map<String, dynamic>>(
+              '*',
+            )
+            .match({'id': content.id}).single();
+
+        final post = KPost.fromJson(postResponse);
+        appendPage([post], post.timestamp);
+      },
+    )..subscribe();
+
+    postsChannel = db.channel('public:posts').on(
+      RealtimeListenTypes.postgresChanges,
+      ChannelFilter(
+        event: 'DELETE',
         schema: 'public',
         table: 'posts',
         filter: 'owner_id=eq.$ownerId',
       ),
       (payload, [ref]) {
-        final realPayLoad = payload['new'] as Map<String, dynamic>;
-        final comment = KPost.fromJson(realPayLoad);
-        appendPage([comment], comment.timestamp);
+        itemList?.removeWhere((e) => e.id == payload['old']['id']);
+        notifyListeners();
       },
     )..subscribe();
   }
@@ -81,7 +104,8 @@ class PostsListController extends PagingController<DateTime, KPost> {
 
   @override
   void dispose() async {
-    await db.removeChannel(channel);
+    await db.removeChannel(postsChannel);
+    await db.removeChannel(postContentsChannel);
     super.dispose();
   }
 }

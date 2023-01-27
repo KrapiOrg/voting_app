@@ -22,12 +22,10 @@ class PostContentWidget extends HookConsumerWidget {
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 500),
       child: contentFuture.when(
-        data: (content) {
-          return content.when(
-            text: (_, t) => TextPostContent(t),
-            image: (_, __) => const SizedBox(),
-          );
-        },
+        data: (c) => c.map(
+          text: (content) => TextPostContent(content.text),
+          image: (_) => const SizedBox(),
+        ),
         loading: () {
           return Shimmer.fromColors(
             baseColor: Colors.grey[300]!,

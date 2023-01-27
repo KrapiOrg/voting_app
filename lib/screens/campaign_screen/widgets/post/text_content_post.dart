@@ -5,8 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:readmore/readmore.dart';
 
-import 'package:voting_app/providers.dart';
-
 class TextPostContent extends ConsumerWidget {
   const TextPostContent(
     this.text, {
@@ -17,9 +15,8 @@ class TextPostContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final faker = ref.watch(fakerProvider);
     return ReadMoreText(
-      faker.lorem.sentences(10).join(),
+      text,
       trimLines: 2,
       trimMode: TrimMode.Line,
       textAlign: TextAlign.justify,

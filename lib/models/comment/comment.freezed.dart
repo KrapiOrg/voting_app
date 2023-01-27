@@ -21,10 +21,11 @@ KComment _$KCommentFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$KComment {
   String get id => throw _privateConstructorUsedError;
-  String get parentId => throw _privateConstructorUsedError;
   String get ownerId => throw _privateConstructorUsedError;
+  String get postId => throw _privateConstructorUsedError;
   DateTime get timestamp => throw _privateConstructorUsedError;
   CommentParentType get parentType => throw _privateConstructorUsedError;
+  String? get parentCommentId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,10 +40,11 @@ abstract class $KCommentCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String parentId,
       String ownerId,
+      String postId,
       DateTime timestamp,
-      CommentParentType parentType});
+      CommentParentType parentType,
+      String? parentCommentId});
 }
 
 /// @nodoc
@@ -59,23 +61,24 @@ class _$KCommentCopyWithImpl<$Res, $Val extends KComment>
   @override
   $Res call({
     Object? id = null,
-    Object? parentId = null,
     Object? ownerId = null,
+    Object? postId = null,
     Object? timestamp = null,
     Object? parentType = null,
+    Object? parentCommentId = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      parentId: null == parentId
-          ? _value.parentId
-          : parentId // ignore: cast_nullable_to_non_nullable
-              as String,
       ownerId: null == ownerId
           ? _value.ownerId
           : ownerId // ignore: cast_nullable_to_non_nullable
+              as String,
+      postId: null == postId
+          ? _value.postId
+          : postId // ignore: cast_nullable_to_non_nullable
               as String,
       timestamp: null == timestamp
           ? _value.timestamp
@@ -85,6 +88,10 @@ class _$KCommentCopyWithImpl<$Res, $Val extends KComment>
           ? _value.parentType
           : parentType // ignore: cast_nullable_to_non_nullable
               as CommentParentType,
+      parentCommentId: freezed == parentCommentId
+          ? _value.parentCommentId
+          : parentCommentId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -99,10 +106,11 @@ abstract class _$$_CommentTextCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String parentId,
       String ownerId,
+      String postId,
       DateTime timestamp,
-      CommentParentType parentType});
+      CommentParentType parentType,
+      String? parentCommentId});
 }
 
 /// @nodoc
@@ -117,23 +125,24 @@ class __$$_CommentTextCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? parentId = null,
     Object? ownerId = null,
+    Object? postId = null,
     Object? timestamp = null,
     Object? parentType = null,
+    Object? parentCommentId = freezed,
   }) {
     return _then(_$_CommentText(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      parentId: null == parentId
-          ? _value.parentId
-          : parentId // ignore: cast_nullable_to_non_nullable
-              as String,
       ownerId: null == ownerId
           ? _value.ownerId
           : ownerId // ignore: cast_nullable_to_non_nullable
+              as String,
+      postId: null == postId
+          ? _value.postId
+          : postId // ignore: cast_nullable_to_non_nullable
               as String,
       timestamp: null == timestamp
           ? _value.timestamp
@@ -143,6 +152,10 @@ class __$$_CommentTextCopyWithImpl<$Res>
           ? _value.parentType
           : parentType // ignore: cast_nullable_to_non_nullable
               as CommentParentType,
+      parentCommentId: freezed == parentCommentId
+          ? _value.parentCommentId
+          : parentCommentId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -152,10 +165,11 @@ class __$$_CommentTextCopyWithImpl<$Res>
 class _$_CommentText implements _CommentText {
   const _$_CommentText(
       {required this.id,
-      required this.parentId,
       required this.ownerId,
+      required this.postId,
       required this.timestamp,
-      required this.parentType});
+      required this.parentType,
+      this.parentCommentId});
 
   factory _$_CommentText.fromJson(Map<String, dynamic> json) =>
       _$$_CommentTextFromJson(json);
@@ -163,17 +177,19 @@ class _$_CommentText implements _CommentText {
   @override
   final String id;
   @override
-  final String parentId;
-  @override
   final String ownerId;
+  @override
+  final String postId;
   @override
   final DateTime timestamp;
   @override
   final CommentParentType parentType;
+  @override
+  final String? parentCommentId;
 
   @override
   String toString() {
-    return 'KComment(id: $id, parentId: $parentId, ownerId: $ownerId, timestamp: $timestamp, parentType: $parentType)';
+    return 'KComment(id: $id, ownerId: $ownerId, postId: $postId, timestamp: $timestamp, parentType: $parentType, parentCommentId: $parentCommentId)';
   }
 
   @override
@@ -182,19 +198,20 @@ class _$_CommentText implements _CommentText {
         (other.runtimeType == runtimeType &&
             other is _$_CommentText &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.parentId, parentId) ||
-                other.parentId == parentId) &&
             (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
+            (identical(other.postId, postId) || other.postId == postId) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.parentType, parentType) ||
-                other.parentType == parentType));
+                other.parentType == parentType) &&
+            (identical(other.parentCommentId, parentCommentId) ||
+                other.parentCommentId == parentCommentId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, parentId, ownerId, timestamp, parentType);
+  int get hashCode => Object.hash(
+      runtimeType, id, ownerId, postId, timestamp, parentType, parentCommentId);
 
   @JsonKey(ignore: true)
   @override
@@ -213,10 +230,11 @@ class _$_CommentText implements _CommentText {
 abstract class _CommentText implements KComment {
   const factory _CommentText(
       {required final String id,
-      required final String parentId,
       required final String ownerId,
+      required final String postId,
       required final DateTime timestamp,
-      required final CommentParentType parentType}) = _$_CommentText;
+      required final CommentParentType parentType,
+      final String? parentCommentId}) = _$_CommentText;
 
   factory _CommentText.fromJson(Map<String, dynamic> json) =
       _$_CommentText.fromJson;
@@ -224,13 +242,15 @@ abstract class _CommentText implements KComment {
   @override
   String get id;
   @override
-  String get parentId;
-  @override
   String get ownerId;
+  @override
+  String get postId;
   @override
   DateTime get timestamp;
   @override
   CommentParentType get parentType;
+  @override
+  String? get parentCommentId;
   @override
   @JsonKey(ignore: true)
   _$$_CommentTextCopyWith<_$_CommentText> get copyWith =>

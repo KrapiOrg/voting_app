@@ -6,8 +6,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
-import 'package:voting_app/content/kcontent.dart';
+import 'package:voting_app/auth/auth_manager.dart';
+import 'package:voting_app/models/auth_state/auth_state.dart';
+
 import 'package:voting_app/models/comment/comment.dart';
+import 'package:voting_app/models/content/kcontent.dart';
 import 'package:voting_app/router.dart';
 
 import 'comment_providers.dart';
@@ -143,20 +146,25 @@ class _NewCommentDialogState extends ConsumerState<NewCommentDialog> {
                         showError.value = true;
                         return;
                       }
+                      final authState = ref.watch(authManagerProvider) as AuthStateSignedIn;
                       final db = Supabase.instance.client;
                       final uuid = const Uuid().v4();
                       final localComment = KComment(
                         id: uuid,
                         timestamp: DateTime.now(),
-                        parentId: widget.postId,
-                        ownerId: widget.ownerId,
+                        postId: widget.postId,
+                        ownerId: authState.user.identity,
                         parentType: CommentParentType.post,
                       );
 
                       working.value = true;
 
                       await db.from('comments').insert(localComment.toJson());
-                      final content = KContent.text(id: uuid, text: controller.document.toPlainText());
+                      final content = KContent.text(
+                        id: uuid,
+                        ownerId: authState.user.identity,
+                        text: controller.document.toPlainText(),
+                      );
                       await db.from('comment_contents').insert(content.toJson());
                       print('inserted $uuid');
                       ref.invalidate(commentCountProvider(widget.postId));
