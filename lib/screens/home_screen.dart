@@ -45,7 +45,10 @@ class HomeScreen extends ConsumerWidget {
                     Expanded(
                       child: UserDetailsWidget(
                         labelText: 'Role:',
-                        text: user.role,
+                        text: user.map(
+                          voter: (_) => 'voter',
+                          candidate: (_) => 'candidate',
+                        ),
                         padding: const EdgeInsets.only(right: 10).w,
                       ),
                     ),

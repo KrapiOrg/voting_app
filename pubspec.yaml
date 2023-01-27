@@ -39,6 +39,7 @@ dependencies:
   uuid: ^3.0.7
   flutter_quill: ^6.3.0
   infinite_scroll_pagination: ^3.2.0
+  flutter_animate: ^3.0.0
 
 dev_dependencies:
   flutter_test:

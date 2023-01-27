@@ -19,11 +19,7 @@ class CommentContentWidget extends ConsumerWidget {
         image: (_, __) => const SizedBox(),
       ),
       loading: CommentLoading.new,
-      error: (_, __) {
-        print(_);
-        print(__);
-        return const SizedBox();
-      },
+      error: (_, __) => const SizedBox(),
     );
   }
 }

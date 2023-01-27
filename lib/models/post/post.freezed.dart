@@ -94,15 +94,15 @@ class __$$_KPostCopyWithImpl<$Res> extends _$KPostCopyWithImpl<$Res, _$_KPost>
     Object? timestamp = null,
   }) {
     return _then(_$_KPost(
-      null == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      null == ownerId
+      ownerId: null == ownerId
           ? _value.ownerId
           : ownerId // ignore: cast_nullable_to_non_nullable
               as String,
-      null == timestamp
+      timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -113,7 +113,8 @@ class __$$_KPostCopyWithImpl<$Res> extends _$KPostCopyWithImpl<$Res, _$_KPost>
 /// @nodoc
 @JsonSerializable()
 class _$_KPost implements _KPost {
-  const _$_KPost(this.id, this.ownerId, this.timestamp);
+  const _$_KPost(
+      {required this.id, required this.ownerId, required this.timestamp});
 
   factory _$_KPost.fromJson(Map<String, dynamic> json) =>
       _$$_KPostFromJson(json);
@@ -161,8 +162,9 @@ class _$_KPost implements _KPost {
 
 abstract class _KPost implements KPost {
   const factory _KPost(
-          final String id, final String ownerId, final DateTime timestamp) =
-      _$_KPost;
+      {required final String id,
+      required final String ownerId,
+      required final DateTime timestamp}) = _$_KPost;
 
   factory _KPost.fromJson(Map<String, dynamic> json) = _$_KPost.fromJson;
 

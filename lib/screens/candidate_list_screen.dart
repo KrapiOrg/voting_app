@@ -13,7 +13,10 @@ final candidatesProvider = FutureProvider.autoDispose<List<KUser>>(
   (ref) async {
     final db = Supabase.instance.client;
 
-    final responses = await db.from('usersview').select<List<Map<String, dynamic>>>('*').eq('role', 'candidate');
+    final responses = await db
+        .from('users')
+        .select<List<Map<String, dynamic>>>('*, details:candidate_details(*)')
+        .eq('role', 'candidate');
 
     final users = <KUser>[];
     for (final element in responses) {
@@ -76,7 +79,11 @@ class CandidateListScreen extends ConsumerWidget {
             ),
           );
         },
-        error: (_, __) => Center(child: Text(_.toString())),
+        error: (_, __) {
+          print(_);
+          print(__);
+          return Center(child: Text(_.toString()));
+        },
         loading: () => const Center(child: CircularProgressIndicator()),
       ),
     );

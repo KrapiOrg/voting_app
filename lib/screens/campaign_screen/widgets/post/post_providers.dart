@@ -47,7 +47,6 @@ class PostsListController extends PagingController<DateTime, KPost> {
         filter: 'owner_id=eq.$ownerId',
       ),
       (payload, [ref]) {
-        print('Change received: ${payload.toString()}');
         final realPayLoad = payload['new'] as Map<String, dynamic>;
         final comment = KPost.fromJson(realPayLoad);
         appendPage([comment], comment.timestamp);

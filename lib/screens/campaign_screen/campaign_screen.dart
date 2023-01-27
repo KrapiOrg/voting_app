@@ -12,7 +12,10 @@ import 'widgets/campagin_header.dart';
 import 'widgets/post/posts_list.dart';
 
 class _CandidateCampaignScreen extends ConsumerWidget {
-  const _CandidateCampaignScreen(this.candidate, {super.key});
+  const _CandidateCampaignScreen({
+    Key? key,
+    required this.candidate,
+  }) : super(key: key);
 
   final KUser candidate;
 
@@ -24,11 +27,14 @@ class _CandidateCampaignScreen extends ConsumerWidget {
       slivers: [
         campaignStream.when(
           data: (campaign) {
-            return MultiSliver(
-              children: [
-                CampaginHeader(candidate: candidate, campaign: campaign),
-                CampaignPostsList(campaign: campaign),
-              ],
+            return SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0).w,
+              sliver: MultiSliver(
+                children: [
+                  CampaginHeader(candidate: candidate, campaign: campaign),
+                  CampaignPostsList(campaign: campaign),
+                ],
+              ),
             );
           },
           loading: () => SliverToBoxAdapter(
@@ -84,10 +90,7 @@ class CampaignScreen extends ConsumerWidget {
         backgroundColor: fillColour1,
       ),
       body: candidateFuture.when(
-        data: (candidate) => candidate.fold<Widget>(
-          () => Center(child: Text('$identity does not exist')),
-          _CandidateCampaignScreen.new,
-        ),
+        data: (user) => _CandidateCampaignScreen(candidate: user),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (_, __) => Center(child: Text(_.toString())),
       ),

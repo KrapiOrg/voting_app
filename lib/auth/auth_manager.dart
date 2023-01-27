@@ -15,6 +15,7 @@ class AuthManager extends StateNotifier<AuthState> {
   static final _remoteDB = Supabase.instance.client;
 
   void _initialize() async {
+    // await _localDB.deleteAll();
     final storedUser = await _localDB.read(key: 'user');
 
     if (storedUser == null) {
@@ -27,13 +28,12 @@ class AuthManager extends StateNotifier<AuthState> {
 
   void signIn(String electionId) async {
     final response = await _remoteDB
-        .from('usersview')
+        .from('users')
         .select<Map<String, dynamic>?>(
           '*',
         )
-        .match({
-      'identity': electionId,
-    }).maybeSingle();
+        .eq('identity', electionId)
+        .maybeSingle();
 
     if (response == null) {
       state = const AuthState.error('You are not registered for this election');

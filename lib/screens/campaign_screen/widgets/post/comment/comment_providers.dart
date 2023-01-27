@@ -34,7 +34,6 @@ class CommentsListController extends PagingController<DateTime, KComment> {
         filter: 'parent_id=eq.$parentId',
       ),
       (payload, [ref]) {
-        print('Change received: ${payload.toString()}');
         final realPayLoad = payload['new'] as Map<String, dynamic>;
         final comment = KComment.fromJson(realPayLoad);
         appendPage([comment], comment.timestamp);
@@ -86,9 +85,15 @@ final commentsListProvider = Provider.autoDispose.family<CommentsListController,
 
 final commentContentProvider = FutureProvider.autoDispose.family<KContent, String>(
   (ref, id) async {
-    final db = Supabase.instance.client;
-    final response = await db.from('comment_contents').select<Map<String, dynamic>>('*').match({'id': id}).single();
-    return KContent.fromJson(response);
+    try {
+      final db = Supabase.instance.client;
+      final response = await db.from('comment_contents').select<Map<String, dynamic>>('*').match({'id': id}).single();
+      return KContent.fromJson(response);
+    } catch (e, st) {
+      print(e);
+      print(st);
+      rethrow;
+    }
   },
 );
 
