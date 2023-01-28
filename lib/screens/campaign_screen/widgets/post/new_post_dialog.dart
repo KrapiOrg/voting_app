@@ -3,12 +3,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:uuid/uuid.dart';
 import 'package:voting_app/auth/auth_manager.dart';
 import 'package:voting_app/models/auth_state/auth_state.dart';
 import 'package:voting_app/models/content/kcontent.dart';
 import 'package:voting_app/models/post/post.dart';
+import 'package:voting_app/providers.dart';
 import 'package:voting_app/router.dart';
 
 class NewPostDialog extends StatefulHookConsumerWidget {
@@ -66,25 +65,19 @@ class _NewPostDialogState extends ConsumerState<NewPostDialog> {
               onPressed: !useValueListenable(working)
                   ? () async {
                       final authState = ref.watch(authManagerProvider) as AuthStateSignedIn;
-                      final db = Supabase.instance.client;
-                      final uuid = const Uuid().v4();
+
+                      final db = ref.watch(dbProvider);
                       final post = KPost(
-                        id: uuid,
-                        timestamp: DateTime.now(),
-                        ownerId: authState.user.identity,
+                        ownerId: authState.user.id,
+                        content: KContent.text(
+                          text: controller.document.toPlainText(),
+                        ),
                       );
 
                       working.value = true;
-                      await db.from('posts').insert(post.toJson());
 
-                      final content = KContent.text(
-                        id: uuid,
-                        text: controller.document.toPlainText(),
-                        ownerId: authState.user.identity,
-                      );
-                      await db.from('post_contents').insert(content.toJson());
+                      await db.collection('posts').create(body: post.toJson());
 
-                      print('inserted $uuid');
                       ref.read(routerProvider).pop();
                     }
                   : null,

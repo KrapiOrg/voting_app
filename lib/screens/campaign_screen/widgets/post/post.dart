@@ -37,16 +37,16 @@ class CampaginPost extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              PostContentWidget(postId: post.id),
+              PostContentWidget(content: post.content),
               Row(
                 children: [
-                  PostTemporalDetails(timestamp: post.timestamp),
+                  PostTemporalDetails(timestamp: post.created!),
                   const Spacer(),
-                  if (loggedInUser.identity == post.ownerId) DeletePostButton(post: post),
+                  if (loggedInUser.id == post.ownerId) DeletePostButton(post: post),
                 ],
               ),
               const Divider(),
-              PostStatistics(ownerId: post.ownerId, postId: post.id),
+              PostStatistics(ownerId: post.ownerId, postId: post.id!),
               const Divider(),
               PostActions(
                 post: post,
@@ -54,7 +54,7 @@ class CampaginPost extends ConsumerWidget {
                 showViewCommentsAction: showViewCommentsAction,
               ),
               if (showPreviewComments) const Divider(),
-              if (showPreviewComments) PreviewComments(postId: post.id),
+              if (showPreviewComments) PreviewComments(postId: post.id!),
             ],
           ),
         ),
@@ -62,4 +62,3 @@ class CampaginPost extends ConsumerWidget {
     );
   }
 }
-

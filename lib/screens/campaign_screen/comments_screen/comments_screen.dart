@@ -6,6 +6,7 @@ import 'package:voting_app/constants/colours.dart';
 import 'package:voting_app/models/comment/comment.dart';
 import 'package:voting_app/models/post/post.dart';
 import 'package:voting_app/screens/campaign_screen/widgets/post/comment/comment_widget.dart';
+import 'package:voting_app/utils/paginator.dart';
 
 import '../widgets/post/comment/comment_providers.dart';
 import '../widgets/post/post.dart';
@@ -20,7 +21,14 @@ class PostCommentsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final comments = ref.watch(commentsListProvider(post.id));
+    final comments = ref.watch(
+      commentsListProvider(
+        DBPaginatorFamily<KComment>(
+          post.id!,
+          KComment.fromJson,
+        ),
+      ),
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -36,7 +44,7 @@ class PostCommentsScreen extends ConsumerWidget {
               showViewCommentsAction: false,
             ),
           ),
-          PagedSliverList<DateTime, KComment>(
+          PagedSliverList<int, KComment>(
             pagingController: comments,
             builderDelegate: PagedChildBuilderDelegate<KComment>(
               itemBuilder: (context, item, index) {

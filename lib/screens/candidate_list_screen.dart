@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:voting_app/constants/colours.dart';
+import 'package:voting_app/providers.dart';
 import 'package:voting_app/router.dart';
 import 'package:voting_app/widgets/text_button.dart';
 
@@ -11,16 +11,12 @@ import '../widgets/named_avatar.dart';
 
 final candidatesProvider = FutureProvider.autoDispose<List<KUser>>(
   (ref) async {
-    final db = Supabase.instance.client;
-
-    final responses = await db
-        .from('users')
-        .select<List<Map<String, dynamic>>>('*, details:candidate_details(*)')
-        .eq('role', 'candidate');
+    final db = ref.watch(dbProvider);
+    final models = await db.collection('users').getFullList(filter: 'role = "candidate"');
 
     final users = <KUser>[];
-    for (final element in responses) {
-      users.add(KUser.fromJson(element));
+    for (final model in models) {
+      users.add(KUser.fromJson(model.toJson()));
     }
 
     return users;
@@ -62,7 +58,7 @@ class CandidateListScreen extends ConsumerWidget {
                       KTextButton(
                         onTap: () {
                           final router = ref.read(routerProvider);
-                          router.push('/home/candidates/${candidate.identity}/campaign');
+                          router.push('/home/candidates/${candidate.id}/campaign');
                         },
                         text: 'Campaign',
                       ),

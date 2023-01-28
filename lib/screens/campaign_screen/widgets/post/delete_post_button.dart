@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:voting_app/models/post/post.dart';
+import 'package:voting_app/providers.dart';
 
-class DeletePostButton extends StatelessWidget {
+class DeletePostButton extends ConsumerWidget {
   const DeletePostButton({
     super.key,
     required this.post,
@@ -11,7 +12,7 @@ class DeletePostButton extends StatelessWidget {
   final KPost post;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return RotatedBox(
       quarterTurns: 1,
       child: PopupMenuButton(
@@ -19,8 +20,8 @@ class DeletePostButton extends StatelessWidget {
           PopupMenuItem(
             child: const Text('Delete'),
             onTap: () async {
-              final db = Supabase.instance.client;
-              await db.from('posts').delete().eq('id', post.id);
+              final db = ref.watch(dbProvider);
+              await db.collection('posts').delete(post.id!);
               print('deleted post ${post.id}');
             },
           ),

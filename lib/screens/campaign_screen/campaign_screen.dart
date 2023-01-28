@@ -21,7 +21,7 @@ class _CandidateCampaignScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final campaignStream = ref.watch(campaignProvider(candidate.identity));
+    final campaignStream = ref.watch(campaignProvider(candidate.id));
 
     return CustomScrollView(
       slivers: [

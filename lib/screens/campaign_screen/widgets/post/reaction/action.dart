@@ -22,9 +22,9 @@ class ReactionAction extends ConsumerWidget {
         ReactionFamily(ownerId, postId),
       ),
     );
-    final isLiked = postReactionsFuture.when(
-      data: (v, _) => v,
-      loading: (_, __) => null,
+    final isLiked = postReactionsFuture.map(
+      data: (_) => _.isLiked,
+      loading: (_) => null,
     );
 
     return AbsorbPointer(

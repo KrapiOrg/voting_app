@@ -1,121 +1,26 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
-import 'package:voting_app/models/content/kcontent.dart';
 
 import 'package:voting_app/models/post/post.dart';
+import 'package:voting_app/providers.dart';
+import 'package:voting_app/utils/paginator.dart';
 
 final postProvider = FutureProvider.autoDispose.family<KPost, String>(
-  (ref, postId) async {
-    final db = Supabase.instance.client;
-
-    final response = await db
-        .from('posts')
-        .select<Map<String, dynamic>>(
-          '*',
-        )
-        .match({'id': postId}).single();
-    return KPost.fromJson(response);
-  },
-);
-
-final postContentProvider = FutureProvider.autoDispose.family<KContent, String>(
   (ref, id) async {
-    final db = Supabase.instance.client;
-    final response = await db.from('post_contents').select<Map<String, dynamic>>('*').match({'id': id}).single();
-    return KContent.fromJson(response);
+    final db = ref.watch(dbProvider);
+    final model = await db.collection('posts').getOne(id, expand: 'contents_rel');
+    return KPost.fromJson(model.toJson());
   },
 );
 
-class PostsListController extends PagingController<DateTime, KPost> {
-  final String ownerId;
-
-  static final db = Supabase.instance.client;
-  static final epoch = DateTime.fromMillisecondsSinceEpoch(1640979000000);
-
-  late final RealtimeChannel postContentsChannel;
-  late final RealtimeChannel postsChannel;
-
-  PostsListController(this.ownerId) : super(firstPageKey: epoch) {
-    addPageRequestListener((pageKey) {
-      fetch(pageKey);
-    });
-    postContentsChannel = db.channel('public:post_contents:owner_id=eq.$ownerId').on(
-      RealtimeListenTypes.postgresChanges,
-      ChannelFilter(
-        event: 'INSERT',
-        schema: 'public',
-        table: 'post_contents',
-        filter: 'owner_id=eq.$ownerId',
-      ),
-      (payload, [ref]) async {
-        final content = KContent.fromJson(payload['new']);
-        final postResponse = await db
-            .from('posts')
-            .select<Map<String, dynamic>>(
-              '*',
-            )
-            .match({'id': content.id}).single();
-
-        final post = KPost.fromJson(postResponse);
-        appendPage([post], post.timestamp);
-      },
-    )..subscribe();
-
-    postsChannel = db.channel('public:posts').on(
-      RealtimeListenTypes.postgresChanges,
-      ChannelFilter(
-        event: 'DELETE',
-        schema: 'public',
-        table: 'posts',
-        filter: 'owner_id=eq.$ownerId',
-      ),
-      (payload, [ref]) {
-        itemList?.removeWhere((e) => e.id == payload['old']['id']);
-        notifyListeners();
-      },
-    )..subscribe();
-  }
-
-  void fetch(DateTime key) async {
-    try {
-      final responses = await db
-          .from('posts')
-          .select<List<Map<String, dynamic>>>('*')
-          .eq('owner_id', ownerId)
-          .filter('timestamp', 'gt', key)
-          .limit(10)
-          .order('timestamp', ascending: true);
-
-      final comments = <KPost>[];
-
-      for (final response in responses) {
-        comments.add(KPost.fromJson(response));
-      }
-
-      if (comments.isNotEmpty) {
-        appendPage(comments, comments.last.timestamp);
-      }
-    } catch (e, st) {
-      print(e);
-      print(st);
-    }
-  }
-
-  @override
-  void dispose() async {
-    await db.removeChannel(postsChannel);
-    await db.removeChannel(postContentsChannel);
-    super.dispose();
-  }
-}
-
-final postsListProvider = Provider.autoDispose.family<PostsListController, String>(
-  (ref, postId) {
-    final controller = PostsListController(postId);
-    ref.onDispose(() {
-      controller.dispose();
-    });
+final postsListProvider = Provider.autoDispose.family<DBPaginator<KPost>, DBPaginatorFamily<KPost>>(
+  (ref, family) {
+    final controller = DBPaginator<KPost>(
+      ref,
+      'posts',
+      family.ownerId,
+      family.fromJson,
+    );
+    ref.onDispose(controller.dispose);
     return controller;
   },
 );

@@ -1,132 +1,146 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:pocketbase/pocketbase.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:voting_app/models/reaction/reaction.dart';
+import 'package:voting_app/providers.dart';
 import 'package:voting_app/reactions_state/reaction_state.dart';
+
+final reactionCountProvider = StreamProvider.autoDispose.family<int, String>(
+  (ref, postId) async* {
+    final subject = BehaviorSubject.seeded(0);
+    final db = ref.watch(dbProvider);
+
+    final countResponse = await db.collection('reactions').getList(
+          page: 1,
+          perPage: 1,
+          filter: 'post_id = "$postId"',
+        );
+
+    subject.add(countResponse.totalItems);
+
+    final remover = await db
+        .collection(
+      'reactions',
+    )
+        .subscribe(
+      '*',
+      (e) {
+        if (e.action == 'create') {
+          subject.add(subject.value + 1);
+        } else {
+          subject.add(subject.value - 1);
+        }
+      },
+    );
+
+    ref.onDispose(() async {
+      await remover.call();
+    });
+    await for (final countChange in subject.stream) {
+      yield countChange;
+    }
+  },
+);
 
 typedef ReactionFamily = Tuple2<String, String>;
 
 class PostReactionNotifier extends StateNotifier<ReactionState> {
-  static final db = Supabase.instance.client;
+  final Ref ref;
 
   final String ownerId;
   final String postId;
-  late final RealtimeChannel channel;
+  UnsubscribeFunc? _unsubscribeFunc;
 
   PostReactionNotifier({
+    required this.ref,
     required this.ownerId,
     required this.postId,
   }) : super(const ReactionState.loading()) {
     fetchInitialState();
+    subscribe();
   }
 
   Future<bool> setLikeState(bool isLiked) async {
-    final db = Supabase.instance.client;
+    final db = ref.watch(dbProvider);
     final reaction = KReaction(
       ownerId: ownerId,
       postId: postId,
-      timestamp: DateTime.now(),
-    ).toJson();
+    );
 
     if (!isLiked) {
       try {
-        await db.from('reactions').insert(reaction);
+        final response = await db.collection('reactions').create(body: reaction.toJson());
+        state = state.copyWith(reactionId: response.id);
         return true;
       } catch (e, st) {
         print(e);
         print(st);
-        return false;
+        rethrow;
       }
     } else {
       try {
-        await db.from('reactions').delete().match(
-          {
-            'owner_id': ownerId,
-            'post_id': postId,
-          },
-        );
+        await db.collection('reactions').delete(state.reactionId!, body: reaction.toJson());
+        state = state.copyWith(reactionId: null);
         return false;
       } catch (e, st) {
         print(e);
         print(st);
-        return isLiked;
+        rethrow;
       }
     }
   }
 
   void fetchInitialState() async {
-    final res = await db
-        .from('reactions')
-        .select(
-          '*',
-          const FetchOptions(
-            count: CountOption.exact,
-          ),
-        )
-        .match(
-      {
-        'owner_id': ownerId,
-        'post_id': postId,
-      },
-    );
-    if (res.count == 0) {
-      state = const ReactionState.data(false, 0);
-    } else {
-      final res = await db
-          .from('reactions')
-          .select(
-            '*',
-            const FetchOptions(count: CountOption.exact),
-          )
-          .match({'post_id': postId});
-      state = ReactionState.data(true, res.count);
+    final db = ref.watch(dbProvider);
+    final responses = await db.collection('reactions').getList(filter: 'post_id = "$postId"');
+    bool isLiked = false;
+    String? myReactionId;
+    for (final response in responses.items) {
+      if (response.getStringValue('owner_id') == ownerId) {
+        isLiked = true;
+        myReactionId = response.id;
+        break;
+      }
     }
-    channel = db.channel('public:reactions:post_id=eq.$postId').on(
-      RealtimeListenTypes.postgresChanges,
-      ChannelFilter(
-        event: 'INSERT',
-        schema: 'public',
-        table: 'reactions',
-        filter: 'post_id=eq.$postId',
-      ),
-      (payload, [ref]) {
-        final reaction = KReaction.fromJson(payload['new']);
+    state = ReactionState.data(isLiked, myReactionId);
+  }
 
-        if (reaction.ownerId == ownerId) {
-          state = state.copyWith(count: state.count + 1, isLiked: true);
-        } else {
-          state = state.copyWith(count: state.count + 1);
-        }
-      },
-    ).on(
-      RealtimeListenTypes.postgresChanges,
-      ChannelFilter(
-        event: 'DELETE',
-        schema: 'public',
-        table: 'reactions',
-        filter: 'post_id=eq.$postId',
-      ),
-      (payload, [ref]) {
-        final reaction = KReaction.fromJson(payload['old']);
-
-        if (reaction.ownerId == ownerId) {
-          state = state.copyWith(count: state.count - 1, isLiked: false);
-        } else {
-          state = state.copyWith(count: state.count - 1);
+  void subscribe() async {
+    final db = ref.watch(dbProvider);
+    _unsubscribeFunc = await db
+        .collection(
+      'reactions',
+    )
+        .subscribe(
+      '*',
+      (e) {
+        final reaction = KReaction.fromJson(e.record!.toJson());
+        if (e.action == 'create') {
+          if (reaction.ownerId == ownerId) {
+            state = state.copyWith(isLiked: true);
+          }
+        } else if (e.action == 'delete') {
+          if (reaction.ownerId == ownerId) {
+            state = state.copyWith(isLiked: false);
+          }
         }
       },
     );
-    channel.subscribe();
   }
 
   @override
   void dispose() async {
-    await db.removeChannel(channel);
+    _unsubscribeFunc?.call();
     super.dispose();
   }
 }
 
 final postReactionProvider =
     StateNotifierProvider.autoDispose.family<PostReactionNotifier, ReactionState, ReactionFamily>(
-  (ref, family) => PostReactionNotifier(ownerId: family.value1, postId: family.value2),
+  (ref, family) => PostReactionNotifier(
+    ref: ref,
+    ownerId: family.value1,
+    postId: family.value2,
+  ),
 );

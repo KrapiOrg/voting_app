@@ -18,12 +18,12 @@ class ReactionsCount extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final commentCount = ref.watch(postReactionProvider(ReactionFamily(ownerId, postId)));
+    final reactionsCount = ref.watch(reactionCountProvider(postId));
 
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 500),
-      child: commentCount.when(
-        data: (_, count) => Row(
+      child: reactionsCount.when(
+        data: (count) => Row(
           children: [
             Text('$count'),
             3.horizontalSpace,
@@ -35,7 +35,7 @@ class ReactionsCount extends ConsumerWidget {
             ),
           ],
         ),
-        loading: (_, __) => Row(
+        loading: () => Row(
           children: [
             Shimmer.fromColors(
               baseColor: Colors.grey[300]!,
@@ -55,6 +55,11 @@ class ReactionsCount extends ConsumerWidget {
             ),
           ],
         ),
+        error: (_, __) {
+          print(_);
+          print(__);
+          return const SizedBox();
+        },
       ),
     );
   }

@@ -12,17 +12,17 @@ part 'user.g.dart';
 )
 class KUser with _$KUser {
   const factory KUser.voter(
-    String identity,
+    String id,
     String firstName,
     String lastName,
-    String phoneNumber,
+    int phoneNumber,
     String party,
   ) = _KUserVoter;
   const factory KUser.candidate(
-    String identity,
+    String id,
     String firstName,
     String lastName,
-    String phoneNumber,
+    int phoneNumber,
     String party,
   ) = _KUserCandidate;
   factory KUser.fromJson(Map<String, dynamic> json) => _$KUserFromJson(json);

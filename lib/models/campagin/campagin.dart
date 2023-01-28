@@ -8,7 +8,7 @@ class KCampaign with _$KCampaign {
   const factory KCampaign(
     String id,
     String slogan,
-    DateTime timestamp,
+    DateTime created,
   ) = _KCampaign;
   factory KCampaign.fromJson(Map<String, dynamic> json) => _$KCampaignFromJson(json);
 }

@@ -1,7 +1,7 @@
 import 'package:faker/faker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
+import 'package:pocketbase/pocketbase.dart';
 
 import 'models/candidate_details/candidate_details.dart';
 import 'models/user/user.dart';
@@ -15,43 +15,19 @@ final fakerProvider = Provider<Faker>(
 );
 
 final userFromIdProvider = FutureProvider.autoDispose.family<KUser, String>(
-  (ref, identity) async {
-    try {
-      final db = Supabase.instance.client;
-      final response = await db
-          .from('users')
-          .select<Map<String, dynamic>>('*')
-          .eq(
-            'identity',
-            identity,
-          )
-          .single();
-      return KUser.fromJson(response);
-    } catch (e, st) {
-      print(e);
-      print(st);
-      rethrow;
-    }
+  (ref, id) async {
+    final db = ref.watch(dbProvider);
+    final model = await db.collection('users').getOne(id);
+    return KUser.fromJson(model.toJson());
   },
 );
 final candidateDetailsProvider = FutureProvider.autoDispose.family<CandidateDetails, String>(
   (ref, identity) async {
-    final db = Supabase.instance.client;
+    final db = ref.watch(dbProvider);
 
-    try {
-      final detailsResponse = await db
-          .from('candidate_details')
-          .select<Map<String, dynamic>>('*')
-          .eq(
-            'id',
-            identity,
-          )
-          .single();
-      return CandidateDetails.fromJson(detailsResponse);
-    } catch (e, st) {
-      print(e);
-      print(st);
-      rethrow;
-    }
+    final model = await db.collection('candidate_details').getFirstListItem('candidate_id="$identity"');
+    return CandidateDetails.fromJson(model.toJson());
   },
 );
+
+final dbProvider = Provider((_) => PocketBase('http://127.0.0.1:8090'));

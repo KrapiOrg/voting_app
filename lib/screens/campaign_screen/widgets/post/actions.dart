@@ -30,11 +30,11 @@ class PostActions extends ConsumerWidget {
             ownerId: ownerId,
           ),
         ReactionAction(
-          postId: post.id,
+          postId: post.id!,
           ownerId: ownerId,
         ),
         AddCommentAction(
-          postId: post.id,
+          postId: post.id!,
           ownerId: ownerId,
         ),
       ],

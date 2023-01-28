@@ -20,9 +20,10 @@ KPost _$KPostFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$KPost {
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  DateTime? get created => throw _privateConstructorUsedError;
   String get ownerId => throw _privateConstructorUsedError;
-  DateTime get timestamp => throw _privateConstructorUsedError;
+  KContent get content => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,9 @@ abstract class $KPostCopyWith<$Res> {
   factory $KPostCopyWith(KPost value, $Res Function(KPost) then) =
       _$KPostCopyWithImpl<$Res, KPost>;
   @useResult
-  $Res call({String id, String ownerId, DateTime timestamp});
+  $Res call({String? id, DateTime? created, String ownerId, KContent content});
+
+  $KContentCopyWith<$Res> get content;
 }
 
 /// @nodoc
@@ -50,24 +53,37 @@ class _$KPostCopyWithImpl<$Res, $Val extends KPost>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
+    Object? created = freezed,
     Object? ownerId = null,
-    Object? timestamp = null,
+    Object? content = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      created: freezed == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       ownerId: null == ownerId
           ? _value.ownerId
           : ownerId // ignore: cast_nullable_to_non_nullable
               as String,
-      timestamp: null == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as KContent,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $KContentCopyWith<$Res> get content {
+    return $KContentCopyWith<$Res>(_value.content, (value) {
+      return _then(_value.copyWith(content: value) as $Val);
+    });
   }
 }
 
@@ -77,7 +93,10 @@ abstract class _$$_KPostCopyWith<$Res> implements $KPostCopyWith<$Res> {
       __$$_KPostCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String ownerId, DateTime timestamp});
+  $Res call({String? id, DateTime? created, String ownerId, KContent content});
+
+  @override
+  $KContentCopyWith<$Res> get content;
 }
 
 /// @nodoc
@@ -89,23 +108,28 @@ class __$$_KPostCopyWithImpl<$Res> extends _$KPostCopyWithImpl<$Res, _$_KPost>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
+    Object? created = freezed,
     Object? ownerId = null,
-    Object? timestamp = null,
+    Object? content = null,
   }) {
     return _then(_$_KPost(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      created: freezed == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       ownerId: null == ownerId
           ? _value.ownerId
           : ownerId // ignore: cast_nullable_to_non_nullable
               as String,
-      timestamp: null == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as KContent,
     ));
   }
 }
@@ -114,21 +138,23 @@ class __$$_KPostCopyWithImpl<$Res> extends _$KPostCopyWithImpl<$Res, _$_KPost>
 @JsonSerializable()
 class _$_KPost implements _KPost {
   const _$_KPost(
-      {required this.id, required this.ownerId, required this.timestamp});
+      {this.id, this.created, required this.ownerId, required this.content});
 
   factory _$_KPost.fromJson(Map<String, dynamic> json) =>
       _$$_KPostFromJson(json);
 
   @override
-  final String id;
+  final String? id;
+  @override
+  final DateTime? created;
   @override
   final String ownerId;
   @override
-  final DateTime timestamp;
+  final KContent content;
 
   @override
   String toString() {
-    return 'KPost(id: $id, ownerId: $ownerId, timestamp: $timestamp)';
+    return 'KPost(id: $id, created: $created, ownerId: $ownerId, content: $content)';
   }
 
   @override
@@ -137,14 +163,14 @@ class _$_KPost implements _KPost {
         (other.runtimeType == runtimeType &&
             other is _$_KPost &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.created, created) || other.created == created) &&
             (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
-            (identical(other.timestamp, timestamp) ||
-                other.timestamp == timestamp));
+            (identical(other.content, content) || other.content == content));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, ownerId, timestamp);
+  int get hashCode => Object.hash(runtimeType, id, created, ownerId, content);
 
   @JsonKey(ignore: true)
   @override
@@ -162,18 +188,21 @@ class _$_KPost implements _KPost {
 
 abstract class _KPost implements KPost {
   const factory _KPost(
-      {required final String id,
+      {final String? id,
+      final DateTime? created,
       required final String ownerId,
-      required final DateTime timestamp}) = _$_KPost;
+      required final KContent content}) = _$_KPost;
 
   factory _KPost.fromJson(Map<String, dynamic> json) = _$_KPost.fromJson;
 
   @override
-  String get id;
+  String? get id;
+  @override
+  DateTime? get created;
   @override
   String get ownerId;
   @override
-  DateTime get timestamp;
+  KContent get content;
   @override
   @JsonKey(ignore: true)
   _$$_KPostCopyWith<_$_KPost> get copyWith =>

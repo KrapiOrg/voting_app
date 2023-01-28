@@ -23,7 +23,7 @@ class CommentsCount extends ConsumerWidget {
         AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
           child: commentCount.when(
-            data: (count) => Text(count),
+            data: (count) => Text('$count'),
             loading: () => Shimmer.fromColors(
               baseColor: Colors.grey[300]!,
               highlightColor: Colors.grey[100]!,

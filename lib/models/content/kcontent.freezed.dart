@@ -29,25 +29,22 @@ KContent _$KContentFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$KContent {
-  String get id => throw _privateConstructorUsedError;
-  String get ownerId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id, String ownerId, String text) text,
-    required TResult Function(String id, String ownerId, String imageLink)
-        image,
+    required TResult Function(String text) text,
+    required TResult Function(String imageLink) image,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id, String ownerId, String text)? text,
-    TResult? Function(String id, String ownerId, String imageLink)? image,
+    TResult? Function(String text)? text,
+    TResult? Function(String imageLink)? image,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id, String ownerId, String text)? text,
-    TResult Function(String id, String ownerId, String imageLink)? image,
+    TResult Function(String text)? text,
+    TResult Function(String imageLink)? image,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -71,17 +68,12 @@ mixin _$KContent {
   }) =>
       throw _privateConstructorUsedError;
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $KContentCopyWith<KContent> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $KContentCopyWith<$Res> {
   factory $KContentCopyWith(KContent value, $Res Function(KContent) then) =
       _$KContentCopyWithImpl<$Res, KContent>;
-  @useResult
-  $Res call({String id, String ownerId});
 }
 
 /// @nodoc
@@ -93,35 +85,15 @@ class _$KContentCopyWithImpl<$Res, $Val extends KContent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? ownerId = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      ownerId: null == ownerId
-          ? _value.ownerId
-          : ownerId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_KContentKrapiTextCopyWith<$Res>
-    implements $KContentCopyWith<$Res> {
+abstract class _$$_KContentKrapiTextCopyWith<$Res> {
   factory _$$_KContentKrapiTextCopyWith(_$_KContentKrapiText value,
           $Res Function(_$_KContentKrapiText) then) =
       __$$_KContentKrapiTextCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String id, String ownerId, String text});
+  $Res call({String text});
 }
 
 /// @nodoc
@@ -135,19 +107,9 @@ class __$$_KContentKrapiTextCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? ownerId = null,
     Object? text = null,
   }) {
     return _then(_$_KContentKrapiText(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      ownerId: null == ownerId
-          ? _value.ownerId
-          : ownerId // ignore: cast_nullable_to_non_nullable
-              as String,
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -159,20 +121,12 @@ class __$$_KContentKrapiTextCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_KContentKrapiText implements _KContentKrapiText {
-  const _$_KContentKrapiText(
-      {required this.id,
-      required this.ownerId,
-      required this.text,
-      final String? $type})
+  const _$_KContentKrapiText({required this.text, final String? $type})
       : $type = $type ?? 'text';
 
   factory _$_KContentKrapiText.fromJson(Map<String, dynamic> json) =>
       _$$_KContentKrapiTextFromJson(json);
 
-  @override
-  final String id;
-  @override
-  final String ownerId;
   @override
   final String text;
 
@@ -181,7 +135,7 @@ class _$_KContentKrapiText implements _KContentKrapiText {
 
   @override
   String toString() {
-    return 'KContent.text(id: $id, ownerId: $ownerId, text: $text)';
+    return 'KContent.text(text: $text)';
   }
 
   @override
@@ -189,14 +143,12 @@ class _$_KContentKrapiText implements _KContentKrapiText {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_KContentKrapiText &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
             (identical(other.text, text) || other.text == text));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, ownerId, text);
+  int get hashCode => Object.hash(runtimeType, text);
 
   @JsonKey(ignore: true)
   @override
@@ -208,31 +160,30 @@ class _$_KContentKrapiText implements _KContentKrapiText {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id, String ownerId, String text) text,
-    required TResult Function(String id, String ownerId, String imageLink)
-        image,
+    required TResult Function(String text) text,
+    required TResult Function(String imageLink) image,
   }) {
-    return text(id, ownerId, this.text);
+    return text(this.text);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id, String ownerId, String text)? text,
-    TResult? Function(String id, String ownerId, String imageLink)? image,
+    TResult? Function(String text)? text,
+    TResult? Function(String imageLink)? image,
   }) {
-    return text?.call(id, ownerId, this.text);
+    return text?.call(this.text);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id, String ownerId, String text)? text,
-    TResult Function(String id, String ownerId, String imageLink)? image,
+    TResult Function(String text)? text,
+    TResult Function(String imageLink)? image,
     required TResult orElse(),
   }) {
     if (text != null) {
-      return text(id, ownerId, this.text);
+      return text(this.text);
     }
     return orElse();
   }
@@ -277,34 +228,25 @@ class _$_KContentKrapiText implements _KContentKrapiText {
 }
 
 abstract class _KContentKrapiText implements KContent {
-  const factory _KContentKrapiText(
-      {required final String id,
-      required final String ownerId,
-      required final String text}) = _$_KContentKrapiText;
+  const factory _KContentKrapiText({required final String text}) =
+      _$_KContentKrapiText;
 
   factory _KContentKrapiText.fromJson(Map<String, dynamic> json) =
       _$_KContentKrapiText.fromJson;
 
-  @override
-  String get id;
-  @override
-  String get ownerId;
   String get text;
-  @override
   @JsonKey(ignore: true)
   _$$_KContentKrapiTextCopyWith<_$_KContentKrapiText> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_KContentKrapiImageCopyWith<$Res>
-    implements $KContentCopyWith<$Res> {
+abstract class _$$_KContentKrapiImageCopyWith<$Res> {
   factory _$$_KContentKrapiImageCopyWith(_$_KContentKrapiImage value,
           $Res Function(_$_KContentKrapiImage) then) =
       __$$_KContentKrapiImageCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String id, String ownerId, String imageLink});
+  $Res call({String imageLink});
 }
 
 /// @nodoc
@@ -318,19 +260,9 @@ class __$$_KContentKrapiImageCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? ownerId = null,
     Object? imageLink = null,
   }) {
     return _then(_$_KContentKrapiImage(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      ownerId: null == ownerId
-          ? _value.ownerId
-          : ownerId // ignore: cast_nullable_to_non_nullable
-              as String,
       imageLink: null == imageLink
           ? _value.imageLink
           : imageLink // ignore: cast_nullable_to_non_nullable
@@ -342,20 +274,12 @@ class __$$_KContentKrapiImageCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_KContentKrapiImage implements _KContentKrapiImage {
-  const _$_KContentKrapiImage(
-      {required this.id,
-      required this.ownerId,
-      required this.imageLink,
-      final String? $type})
+  const _$_KContentKrapiImage({required this.imageLink, final String? $type})
       : $type = $type ?? 'image';
 
   factory _$_KContentKrapiImage.fromJson(Map<String, dynamic> json) =>
       _$$_KContentKrapiImageFromJson(json);
 
-  @override
-  final String id;
-  @override
-  final String ownerId;
   @override
   final String imageLink;
 
@@ -364,7 +288,7 @@ class _$_KContentKrapiImage implements _KContentKrapiImage {
 
   @override
   String toString() {
-    return 'KContent.image(id: $id, ownerId: $ownerId, imageLink: $imageLink)';
+    return 'KContent.image(imageLink: $imageLink)';
   }
 
   @override
@@ -372,15 +296,13 @@ class _$_KContentKrapiImage implements _KContentKrapiImage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_KContentKrapiImage &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
             (identical(other.imageLink, imageLink) ||
                 other.imageLink == imageLink));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, ownerId, imageLink);
+  int get hashCode => Object.hash(runtimeType, imageLink);
 
   @JsonKey(ignore: true)
   @override
@@ -392,31 +314,30 @@ class _$_KContentKrapiImage implements _KContentKrapiImage {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id, String ownerId, String text) text,
-    required TResult Function(String id, String ownerId, String imageLink)
-        image,
+    required TResult Function(String text) text,
+    required TResult Function(String imageLink) image,
   }) {
-    return image(id, ownerId, imageLink);
+    return image(imageLink);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id, String ownerId, String text)? text,
-    TResult? Function(String id, String ownerId, String imageLink)? image,
+    TResult? Function(String text)? text,
+    TResult? Function(String imageLink)? image,
   }) {
-    return image?.call(id, ownerId, imageLink);
+    return image?.call(imageLink);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id, String ownerId, String text)? text,
-    TResult Function(String id, String ownerId, String imageLink)? image,
+    TResult Function(String text)? text,
+    TResult Function(String imageLink)? image,
     required TResult orElse(),
   }) {
     if (image != null) {
-      return image(id, ownerId, imageLink);
+      return image(imageLink);
     }
     return orElse();
   }
@@ -461,20 +382,13 @@ class _$_KContentKrapiImage implements _KContentKrapiImage {
 }
 
 abstract class _KContentKrapiImage implements KContent {
-  const factory _KContentKrapiImage(
-      {required final String id,
-      required final String ownerId,
-      required final String imageLink}) = _$_KContentKrapiImage;
+  const factory _KContentKrapiImage({required final String imageLink}) =
+      _$_KContentKrapiImage;
 
   factory _KContentKrapiImage.fromJson(Map<String, dynamic> json) =
       _$_KContentKrapiImage.fromJson;
 
-  @override
-  String get id;
-  @override
-  String get ownerId;
   String get imageLink;
-  @override
   @JsonKey(ignore: true)
   _$$_KContentKrapiImageCopyWith<_$_KContentKrapiImage> get copyWith =>
       throw _privateConstructorUsedError;

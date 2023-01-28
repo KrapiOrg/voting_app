@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:voting_app/models/comment/comment.dart';
+import 'package:voting_app/utils/paginator.dart';
 
 import 'comment/comment_providers.dart';
 import 'comment/comment_widget.dart';
 
-class PreviewComments extends ConsumerWidget {
+class PreviewComments extends HookConsumerWidget {
   const PreviewComments({
     super.key,
     required this.postId,
@@ -16,38 +19,39 @@ class PreviewComments extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final previewCommentsStream = ref.watch(previewCommentsProvider(postId));
-    return previewCommentsStream.when(
-      data: (comments) {
-        if (comments.isEmpty) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: Text(
-                'There are no comments on this post',
-                style: GoogleFonts.poppins(
-                  fontSize: 30.sp,
-                ),
+    final comments = useValueListenable(
+          ref.watch(
+            commentsListProvider(
+              DBPaginatorFamily<KComment>(
+                postId,
+                KComment.fromJson,
               ),
             ),
-          );
-        }
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0).h,
-          child: Column(
-            children: List.generate(
-              comments.length,
-              (index) => CommentWidget(comment: comments[index]),
+          ),
+        ).itemList?.take(3).toList() ??
+        [];
+
+    if (comments.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Text(
+            'There are no comments on this post',
+            style: GoogleFonts.poppins(
+              fontSize: 30.sp,
             ),
           ),
-        );
-      },
-      error: (_, __) {
-        print(_);
-        print(__);
-        return const SizedBox();
-      },
-      loading: () => const SizedBox(),
+        ),
+      );
+    }
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0).h,
+      child: Column(
+        children: List.generate(
+          comments.length,
+          (index) => CommentWidget(comment: comments[index]),
+        ),
+      ),
     );
   }
 }

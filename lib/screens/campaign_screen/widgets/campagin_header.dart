@@ -28,7 +28,7 @@ class CampaginHeader extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loggedInUser = (ref.watch(authManagerProvider) as AuthStateSignedIn).user;
-    final detailsFuture = ref.watch(candidateDetailsProvider(candidate.identity));
+    final detailsFuture = ref.watch(candidateDetailsProvider(candidate.id));
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -54,7 +54,7 @@ class CampaginHeader extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             CandidateBio(detailsFuture: detailsFuture),
-            if (candidate.identity == loggedInUser.identity) NewPostButton(candidate: candidate),
+            if (candidate.id == loggedInUser.id) NewPostButton(candidate: candidate),
           ],
         ),
       ],

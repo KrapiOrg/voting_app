@@ -2,20 +2,19 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:supabase_flutter/supabase_flutter.dart' hide Provider, AuthState;
 import 'package:voting_app/models/auth_state/auth_state.dart';
+import 'package:voting_app/providers.dart';
 
 import '../models/user/user.dart';
 
 class AuthManager extends StateNotifier<AuthState> {
-  AuthManager() : super(const AuthState.unInitialized()) {
+  AuthManager(this.ref) : super(const AuthState.unInitialized()) {
     _initialize();
   }
   static const _localDB = FlutterSecureStorage();
-  static final _remoteDB = Supabase.instance.client;
+  final Ref ref;
 
   void _initialize() async {
-    // await _localDB.deleteAll();
     final storedUser = await _localDB.read(key: 'user');
 
     if (storedUser == null) {
@@ -26,22 +25,17 @@ class AuthManager extends StateNotifier<AuthState> {
     }
   }
 
-  void signIn(String electionId) async {
-    final response = await _remoteDB
-        .from('users')
-        .select<Map<String, dynamic>?>(
-          '*',
-        )
-        .eq('identity', electionId)
-        .maybeSingle();
+  void signIn(String id) async {
+    final db = ref.watch(dbProvider);
 
-    if (response == null) {
-      state = const AuthState.error('You are not registered for this election');
-    } else {
-      print(response);
-      final user = KUser.fromJson(response);
+    try {
+      final response = await db.collection('users').getOne(id);
+      final user = KUser.fromJson(response.toJson());
       await _localDB.write(key: 'user', value: jsonEncode(user.toJson()));
       state = AuthState.signedIn(user);
+    } catch (_, __) {
+      state = const AuthState.error('You are not registered for this election');
+      rethrow;
     }
   }
 
@@ -53,4 +47,7 @@ class AuthManager extends StateNotifier<AuthState> {
 
 final userProvider = Provider<KUser>((_) => throw UnimplementedError());
 
-final authManagerProvider = StateNotifierProvider<AuthManager, AuthState>((ref) => AuthManager());
+final authManagerProvider = StateNotifierProvider<AuthManager, AuthState>(
+  (ref) => AuthManager(ref),
+  dependencies: [dbProvider],
+);

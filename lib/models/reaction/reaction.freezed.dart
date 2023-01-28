@@ -22,7 +22,6 @@ KReaction _$KReactionFromJson(Map<String, dynamic> json) {
 mixin _$KReaction {
   String get postId => throw _privateConstructorUsedError;
   String get ownerId => throw _privateConstructorUsedError;
-  DateTime get timestamp => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +34,7 @@ abstract class $KReactionCopyWith<$Res> {
   factory $KReactionCopyWith(KReaction value, $Res Function(KReaction) then) =
       _$KReactionCopyWithImpl<$Res, KReaction>;
   @useResult
-  $Res call({String postId, String ownerId, DateTime timestamp});
+  $Res call({String postId, String ownerId});
 }
 
 /// @nodoc
@@ -53,7 +52,6 @@ class _$KReactionCopyWithImpl<$Res, $Val extends KReaction>
   $Res call({
     Object? postId = null,
     Object? ownerId = null,
-    Object? timestamp = null,
   }) {
     return _then(_value.copyWith(
       postId: null == postId
@@ -64,10 +62,6 @@ class _$KReactionCopyWithImpl<$Res, $Val extends KReaction>
           ? _value.ownerId
           : ownerId // ignore: cast_nullable_to_non_nullable
               as String,
-      timestamp: null == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ) as $Val);
   }
 }
@@ -79,7 +73,7 @@ abstract class _$$_KReactionCopyWith<$Res> implements $KReactionCopyWith<$Res> {
       __$$_KReactionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String postId, String ownerId, DateTime timestamp});
+  $Res call({String postId, String ownerId});
 }
 
 /// @nodoc
@@ -95,7 +89,6 @@ class __$$_KReactionCopyWithImpl<$Res>
   $Res call({
     Object? postId = null,
     Object? ownerId = null,
-    Object? timestamp = null,
   }) {
     return _then(_$_KReaction(
       postId: null == postId
@@ -106,10 +99,6 @@ class __$$_KReactionCopyWithImpl<$Res>
           ? _value.ownerId
           : ownerId // ignore: cast_nullable_to_non_nullable
               as String,
-      timestamp: null == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ));
   }
 }
@@ -117,8 +106,7 @@ class __$$_KReactionCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_KReaction implements _KReaction {
-  const _$_KReaction(
-      {required this.postId, required this.ownerId, required this.timestamp});
+  const _$_KReaction({required this.postId, required this.ownerId});
 
   factory _$_KReaction.fromJson(Map<String, dynamic> json) =>
       _$$_KReactionFromJson(json);
@@ -127,12 +115,10 @@ class _$_KReaction implements _KReaction {
   final String postId;
   @override
   final String ownerId;
-  @override
-  final DateTime timestamp;
 
   @override
   String toString() {
-    return 'KReaction(postId: $postId, ownerId: $ownerId, timestamp: $timestamp)';
+    return 'KReaction(postId: $postId, ownerId: $ownerId)';
   }
 
   @override
@@ -141,14 +127,12 @@ class _$_KReaction implements _KReaction {
         (other.runtimeType == runtimeType &&
             other is _$_KReaction &&
             (identical(other.postId, postId) || other.postId == postId) &&
-            (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
-            (identical(other.timestamp, timestamp) ||
-                other.timestamp == timestamp));
+            (identical(other.ownerId, ownerId) || other.ownerId == ownerId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, postId, ownerId, timestamp);
+  int get hashCode => Object.hash(runtimeType, postId, ownerId);
 
   @JsonKey(ignore: true)
   @override
@@ -167,8 +151,7 @@ class _$_KReaction implements _KReaction {
 abstract class _KReaction implements KReaction {
   const factory _KReaction(
       {required final String postId,
-      required final String ownerId,
-      required final DateTime timestamp}) = _$_KReaction;
+      required final String ownerId}) = _$_KReaction;
 
   factory _KReaction.fromJson(Map<String, dynamic> json) =
       _$_KReaction.fromJson;
@@ -177,8 +160,6 @@ abstract class _KReaction implements KReaction {
   String get postId;
   @override
   String get ownerId;
-  @override
-  DateTime get timestamp;
   @override
   @JsonKey(ignore: true)
   _$$_KReactionCopyWith<_$_KReaction> get copyWith =>

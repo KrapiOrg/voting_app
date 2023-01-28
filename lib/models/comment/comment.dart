@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:voting_app/models/content/kcontent.dart';
 
 part 'comment.freezed.dart';
 part 'comment.g.dart';
@@ -11,11 +12,11 @@ enum CommentParentType {
 @freezed
 class KComment with _$KComment {
   const factory KComment({
-    required String id,
+    String? id,
     required String ownerId,
     required String postId,
-    required DateTime timestamp,
     required CommentParentType parentType,
+    required KContent content,
     String? parentCommentId,
   }) = _CommentText;
 

@@ -29,38 +29,38 @@ KUser _$KUserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$KUser {
-  String get identity => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get firstName => throw _privateConstructorUsedError;
   String get lastName => throw _privateConstructorUsedError;
-  String get phoneNumber => throw _privateConstructorUsedError;
+  int get phoneNumber => throw _privateConstructorUsedError;
   String get party => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String identity, String firstName,
-            String lastName, String phoneNumber, String party)
+    required TResult Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)
         voter,
-    required TResult Function(String identity, String firstName,
-            String lastName, String phoneNumber, String party)
+    required TResult Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)
         candidate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String identity, String firstName, String lastName,
-            String phoneNumber, String party)?
+    TResult? Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)?
         voter,
-    TResult? Function(String identity, String firstName, String lastName,
-            String phoneNumber, String party)?
+    TResult? Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)?
         candidate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String identity, String firstName, String lastName,
-            String phoneNumber, String party)?
+    TResult Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)?
         voter,
-    TResult Function(String identity, String firstName, String lastName,
-            String phoneNumber, String party)?
+    TResult Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)?
         candidate,
     required TResult orElse(),
   }) =>
@@ -95,10 +95,10 @@ abstract class $KUserCopyWith<$Res> {
       _$KUserCopyWithImpl<$Res, KUser>;
   @useResult
   $Res call(
-      {String identity,
+      {String id,
       String firstName,
       String lastName,
-      String phoneNumber,
+      int phoneNumber,
       String party});
 }
 
@@ -115,16 +115,16 @@ class _$KUserCopyWithImpl<$Res, $Val extends KUser>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? identity = null,
+    Object? id = null,
     Object? firstName = null,
     Object? lastName = null,
     Object? phoneNumber = null,
     Object? party = null,
   }) {
     return _then(_value.copyWith(
-      identity: null == identity
-          ? _value.identity
-          : identity // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       firstName: null == firstName
           ? _value.firstName
@@ -137,7 +137,7 @@ class _$KUserCopyWithImpl<$Res, $Val extends KUser>
       phoneNumber: null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       party: null == party
           ? _value.party
           : party // ignore: cast_nullable_to_non_nullable
@@ -154,10 +154,10 @@ abstract class _$$_KUserVoterCopyWith<$Res> implements $KUserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String identity,
+      {String id,
       String firstName,
       String lastName,
-      String phoneNumber,
+      int phoneNumber,
       String party});
 }
 
@@ -172,16 +172,16 @@ class __$$_KUserVoterCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? identity = null,
+    Object? id = null,
     Object? firstName = null,
     Object? lastName = null,
     Object? phoneNumber = null,
     Object? party = null,
   }) {
     return _then(_$_KUserVoter(
-      null == identity
-          ? _value.identity
-          : identity // ignore: cast_nullable_to_non_nullable
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       null == firstName
           ? _value.firstName
@@ -194,7 +194,7 @@ class __$$_KUserVoterCopyWithImpl<$Res>
       null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       null == party
           ? _value.party
           : party // ignore: cast_nullable_to_non_nullable
@@ -206,8 +206,8 @@ class __$$_KUserVoterCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_KUserVoter implements _KUserVoter {
-  const _$_KUserVoter(this.identity, this.firstName, this.lastName,
-      this.phoneNumber, this.party,
+  const _$_KUserVoter(
+      this.id, this.firstName, this.lastName, this.phoneNumber, this.party,
       {final String? $type})
       : $type = $type ?? 'voter';
 
@@ -215,13 +215,13 @@ class _$_KUserVoter implements _KUserVoter {
       _$$_KUserVoterFromJson(json);
 
   @override
-  final String identity;
+  final String id;
   @override
   final String firstName;
   @override
   final String lastName;
   @override
-  final String phoneNumber;
+  final int phoneNumber;
   @override
   final String party;
 
@@ -230,7 +230,7 @@ class _$_KUserVoter implements _KUserVoter {
 
   @override
   String toString() {
-    return 'KUser.voter(identity: $identity, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, party: $party)';
+    return 'KUser.voter(id: $id, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, party: $party)';
   }
 
   @override
@@ -238,8 +238,7 @@ class _$_KUserVoter implements _KUserVoter {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_KUserVoter &&
-            (identical(other.identity, identity) ||
-                other.identity == identity) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.firstName, firstName) ||
                 other.firstName == firstName) &&
             (identical(other.lastName, lastName) ||
@@ -251,8 +250,8 @@ class _$_KUserVoter implements _KUserVoter {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, identity, firstName, lastName, phoneNumber, party);
+  int get hashCode =>
+      Object.hash(runtimeType, id, firstName, lastName, phoneNumber, party);
 
   @JsonKey(ignore: true)
   @override
@@ -263,42 +262,42 @@ class _$_KUserVoter implements _KUserVoter {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String identity, String firstName,
-            String lastName, String phoneNumber, String party)
+    required TResult Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)
         voter,
-    required TResult Function(String identity, String firstName,
-            String lastName, String phoneNumber, String party)
+    required TResult Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)
         candidate,
   }) {
-    return voter(identity, firstName, lastName, phoneNumber, party);
+    return voter(id, firstName, lastName, phoneNumber, party);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String identity, String firstName, String lastName,
-            String phoneNumber, String party)?
+    TResult? Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)?
         voter,
-    TResult? Function(String identity, String firstName, String lastName,
-            String phoneNumber, String party)?
+    TResult? Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)?
         candidate,
   }) {
-    return voter?.call(identity, firstName, lastName, phoneNumber, party);
+    return voter?.call(id, firstName, lastName, phoneNumber, party);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String identity, String firstName, String lastName,
-            String phoneNumber, String party)?
+    TResult Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)?
         voter,
-    TResult Function(String identity, String firstName, String lastName,
-            String phoneNumber, String party)?
+    TResult Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)?
         candidate,
     required TResult orElse(),
   }) {
     if (voter != null) {
-      return voter(identity, firstName, lastName, phoneNumber, party);
+      return voter(id, firstName, lastName, phoneNumber, party);
     }
     return orElse();
   }
@@ -344,23 +343,23 @@ class _$_KUserVoter implements _KUserVoter {
 
 abstract class _KUserVoter implements KUser {
   const factory _KUserVoter(
-      final String identity,
+      final String id,
       final String firstName,
       final String lastName,
-      final String phoneNumber,
+      final int phoneNumber,
       final String party) = _$_KUserVoter;
 
   factory _KUserVoter.fromJson(Map<String, dynamic> json) =
       _$_KUserVoter.fromJson;
 
   @override
-  String get identity;
+  String get id;
   @override
   String get firstName;
   @override
   String get lastName;
   @override
-  String get phoneNumber;
+  int get phoneNumber;
   @override
   String get party;
   @override
@@ -378,10 +377,10 @@ abstract class _$$_KUserCandidateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String identity,
+      {String id,
       String firstName,
       String lastName,
-      String phoneNumber,
+      int phoneNumber,
       String party});
 }
 
@@ -396,16 +395,16 @@ class __$$_KUserCandidateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? identity = null,
+    Object? id = null,
     Object? firstName = null,
     Object? lastName = null,
     Object? phoneNumber = null,
     Object? party = null,
   }) {
     return _then(_$_KUserCandidate(
-      null == identity
-          ? _value.identity
-          : identity // ignore: cast_nullable_to_non_nullable
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       null == firstName
           ? _value.firstName
@@ -418,7 +417,7 @@ class __$$_KUserCandidateCopyWithImpl<$Res>
       null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       null == party
           ? _value.party
           : party // ignore: cast_nullable_to_non_nullable
@@ -430,8 +429,8 @@ class __$$_KUserCandidateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_KUserCandidate implements _KUserCandidate {
-  const _$_KUserCandidate(this.identity, this.firstName, this.lastName,
-      this.phoneNumber, this.party,
+  const _$_KUserCandidate(
+      this.id, this.firstName, this.lastName, this.phoneNumber, this.party,
       {final String? $type})
       : $type = $type ?? 'candidate';
 
@@ -439,13 +438,13 @@ class _$_KUserCandidate implements _KUserCandidate {
       _$$_KUserCandidateFromJson(json);
 
   @override
-  final String identity;
+  final String id;
   @override
   final String firstName;
   @override
   final String lastName;
   @override
-  final String phoneNumber;
+  final int phoneNumber;
   @override
   final String party;
 
@@ -454,7 +453,7 @@ class _$_KUserCandidate implements _KUserCandidate {
 
   @override
   String toString() {
-    return 'KUser.candidate(identity: $identity, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, party: $party)';
+    return 'KUser.candidate(id: $id, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, party: $party)';
   }
 
   @override
@@ -462,8 +461,7 @@ class _$_KUserCandidate implements _KUserCandidate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_KUserCandidate &&
-            (identical(other.identity, identity) ||
-                other.identity == identity) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.firstName, firstName) ||
                 other.firstName == firstName) &&
             (identical(other.lastName, lastName) ||
@@ -475,8 +473,8 @@ class _$_KUserCandidate implements _KUserCandidate {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, identity, firstName, lastName, phoneNumber, party);
+  int get hashCode =>
+      Object.hash(runtimeType, id, firstName, lastName, phoneNumber, party);
 
   @JsonKey(ignore: true)
   @override
@@ -487,42 +485,42 @@ class _$_KUserCandidate implements _KUserCandidate {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String identity, String firstName,
-            String lastName, String phoneNumber, String party)
+    required TResult Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)
         voter,
-    required TResult Function(String identity, String firstName,
-            String lastName, String phoneNumber, String party)
+    required TResult Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)
         candidate,
   }) {
-    return candidate(identity, firstName, lastName, phoneNumber, party);
+    return candidate(id, firstName, lastName, phoneNumber, party);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String identity, String firstName, String lastName,
-            String phoneNumber, String party)?
+    TResult? Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)?
         voter,
-    TResult? Function(String identity, String firstName, String lastName,
-            String phoneNumber, String party)?
+    TResult? Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)?
         candidate,
   }) {
-    return candidate?.call(identity, firstName, lastName, phoneNumber, party);
+    return candidate?.call(id, firstName, lastName, phoneNumber, party);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String identity, String firstName, String lastName,
-            String phoneNumber, String party)?
+    TResult Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)?
         voter,
-    TResult Function(String identity, String firstName, String lastName,
-            String phoneNumber, String party)?
+    TResult Function(String id, String firstName, String lastName,
+            int phoneNumber, String party)?
         candidate,
     required TResult orElse(),
   }) {
     if (candidate != null) {
-      return candidate(identity, firstName, lastName, phoneNumber, party);
+      return candidate(id, firstName, lastName, phoneNumber, party);
     }
     return orElse();
   }
@@ -568,23 +566,23 @@ class _$_KUserCandidate implements _KUserCandidate {
 
 abstract class _KUserCandidate implements KUser {
   const factory _KUserCandidate(
-      final String identity,
+      final String id,
       final String firstName,
       final String lastName,
-      final String phoneNumber,
+      final int phoneNumber,
       final String party) = _$_KUserCandidate;
 
   factory _KUserCandidate.fromJson(Map<String, dynamic> json) =
       _$_KUserCandidate.fromJson;
 
   @override
-  String get identity;
+  String get id;
   @override
   String get firstName;
   @override
   String get lastName;
   @override
-  String get phoneNumber;
+  int get phoneNumber;
   @override
   String get party;
   @override

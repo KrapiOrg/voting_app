@@ -38,7 +38,7 @@ class HomeScreen extends ConsumerWidget {
                 ),
                 UserDetailsWidget(
                   labelText: 'Your Election ID:',
-                  text: user.identity,
+                  text: user.id,
                 ),
                 Row(
                   children: [

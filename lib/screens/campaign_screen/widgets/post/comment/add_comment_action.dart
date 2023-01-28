@@ -4,16 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:flutter_quill/flutter_quill.dart' as quill;
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:uuid/uuid.dart';
+
 import 'package:voting_app/auth/auth_manager.dart';
 import 'package:voting_app/models/auth_state/auth_state.dart';
 
 import 'package:voting_app/models/comment/comment.dart';
 import 'package:voting_app/models/content/kcontent.dart';
+import 'package:voting_app/providers.dart';
 import 'package:voting_app/router.dart';
-
-import 'comment_providers.dart';
 
 class AddCommentAction extends StatelessWidget {
   const AddCommentAction({
@@ -147,27 +145,21 @@ class _NewCommentDialogState extends ConsumerState<NewCommentDialog> {
                         return;
                       }
                       final authState = ref.watch(authManagerProvider) as AuthStateSignedIn;
-                      final db = Supabase.instance.client;
-                      final uuid = const Uuid().v4();
-                      final localComment = KComment(
-                        id: uuid,
-                        timestamp: DateTime.now(),
+                      final db = ref.watch(dbProvider);
+
+                      final comment = KComment(
                         postId: widget.postId,
-                        ownerId: authState.user.identity,
+                        ownerId: authState.user.id,
                         parentType: CommentParentType.post,
+                        content: KContent.text(
+                          text: controller.document.toPlainText(),
+                        ),
                       );
 
                       working.value = true;
 
-                      await db.from('comments').insert(localComment.toJson());
-                      final content = KContent.text(
-                        id: uuid,
-                        ownerId: authState.user.identity,
-                        text: controller.document.toPlainText(),
-                      );
-                      await db.from('comment_contents').insert(content.toJson());
-                      print('inserted $uuid');
-                      ref.invalidate(commentCountProvider(widget.postId));
+                      await db.collection('comments').create(body: comment.toJson());
+
                       ref.read(routerProvider).pop();
                     }
                   : null,

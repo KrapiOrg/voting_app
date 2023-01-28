@@ -6,10 +6,10 @@ part 'reaction_state.freezed.dart';
 class ReactionState with _$ReactionState {
   const factory ReactionState.loading({
     @Default(false) bool isLiked,
-    @Default(0) int count,
+    @Default('') String? reactionId,
   }) = _ReactionStateLoading;
   const factory ReactionState.data(
     bool isLiked,
-    int count,
+    String? reactionId,
   ) = _ReactionStateData;
 }

@@ -1,18 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
-
-import '../../models/campagin/campagin.dart';
+import 'package:voting_app/models/campagin/campagin.dart';
+import 'package:voting_app/providers.dart';
 
 final campaignProvider = FutureProvider.autoDispose.family<KCampaign, String>(
   (ref, userId) async {
-    final db = Supabase.instance.client;
-
+    final db = ref.watch(dbProvider);
     try {
-      final response = await db.from('campaigns').select<Map<String, dynamic>>('*').match({'id': userId}).single();
-      return KCampaign.fromJson(response);
-    } catch (e, st) {
-      print(e.toString());
-      print(st.toString());
+      final model = await db.collection('campaigns').getFirstListItem('users_rel = "$userId"');
+
+      return KCampaign.fromJson(model.toJson());
+    } catch (_) {
       rethrow;
     }
   },

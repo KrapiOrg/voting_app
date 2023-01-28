@@ -22,7 +22,7 @@ KCampaign _$KCampaignFromJson(Map<String, dynamic> json) {
 mixin _$KCampaign {
   String get id => throw _privateConstructorUsedError;
   String get slogan => throw _privateConstructorUsedError;
-  DateTime get timestamp => throw _privateConstructorUsedError;
+  DateTime get created => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $KCampaignCopyWith<$Res> {
   factory $KCampaignCopyWith(KCampaign value, $Res Function(KCampaign) then) =
       _$KCampaignCopyWithImpl<$Res, KCampaign>;
   @useResult
-  $Res call({String id, String slogan, DateTime timestamp});
+  $Res call({String id, String slogan, DateTime created});
 }
 
 /// @nodoc
@@ -53,7 +53,7 @@ class _$KCampaignCopyWithImpl<$Res, $Val extends KCampaign>
   $Res call({
     Object? id = null,
     Object? slogan = null,
-    Object? timestamp = null,
+    Object? created = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -64,9 +64,9 @@ class _$KCampaignCopyWithImpl<$Res, $Val extends KCampaign>
           ? _value.slogan
           : slogan // ignore: cast_nullable_to_non_nullable
               as String,
-      timestamp: null == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
+      created: null == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ) as $Val);
   }
@@ -79,7 +79,7 @@ abstract class _$$_KCampaignCopyWith<$Res> implements $KCampaignCopyWith<$Res> {
       __$$_KCampaignCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String slogan, DateTime timestamp});
+  $Res call({String id, String slogan, DateTime created});
 }
 
 /// @nodoc
@@ -95,7 +95,7 @@ class __$$_KCampaignCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? slogan = null,
-    Object? timestamp = null,
+    Object? created = null,
   }) {
     return _then(_$_KCampaign(
       null == id
@@ -106,9 +106,9 @@ class __$$_KCampaignCopyWithImpl<$Res>
           ? _value.slogan
           : slogan // ignore: cast_nullable_to_non_nullable
               as String,
-      null == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
+      null == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -117,7 +117,7 @@ class __$$_KCampaignCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_KCampaign implements _KCampaign {
-  const _$_KCampaign(this.id, this.slogan, this.timestamp);
+  const _$_KCampaign(this.id, this.slogan, this.created);
 
   factory _$_KCampaign.fromJson(Map<String, dynamic> json) =>
       _$$_KCampaignFromJson(json);
@@ -127,11 +127,11 @@ class _$_KCampaign implements _KCampaign {
   @override
   final String slogan;
   @override
-  final DateTime timestamp;
+  final DateTime created;
 
   @override
   String toString() {
-    return 'KCampaign(id: $id, slogan: $slogan, timestamp: $timestamp)';
+    return 'KCampaign(id: $id, slogan: $slogan, created: $created)';
   }
 
   @override
@@ -141,13 +141,12 @@ class _$_KCampaign implements _KCampaign {
             other is _$_KCampaign &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.slogan, slogan) || other.slogan == slogan) &&
-            (identical(other.timestamp, timestamp) ||
-                other.timestamp == timestamp));
+            (identical(other.created, created) || other.created == created));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, slogan, timestamp);
+  int get hashCode => Object.hash(runtimeType, id, slogan, created);
 
   @JsonKey(ignore: true)
   @override
@@ -165,7 +164,7 @@ class _$_KCampaign implements _KCampaign {
 
 abstract class _KCampaign implements KCampaign {
   const factory _KCampaign(
-          final String id, final String slogan, final DateTime timestamp) =
+          final String id, final String slogan, final DateTime created) =
       _$_KCampaign;
 
   factory _KCampaign.fromJson(Map<String, dynamic> json) =
@@ -176,7 +175,7 @@ abstract class _KCampaign implements KCampaign {
   @override
   String get slogan;
   @override
-  DateTime get timestamp;
+  DateTime get created;
   @override
   @JsonKey(ignore: true)
   _$$_KCampaignCopyWith<_$_KCampaign> get copyWith =>

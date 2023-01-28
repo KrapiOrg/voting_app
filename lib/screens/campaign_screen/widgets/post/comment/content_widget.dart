@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'comment_providers.dart';
-import 'loading.dart';
+import 'package:voting_app/models/content/kcontent.dart';
+
 import 'text_content_comment.dart';
 
 class CommentContentWidget extends ConsumerWidget {
-  const CommentContentWidget({super.key, required this.commentId});
+  const CommentContentWidget({super.key, required this.content});
 
-  final String commentId;
+  final KContent content;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final commentContent = ref.watch(commentContentProvider(commentId));
-    return commentContent.when(
-      data: (c) => c.map(
-        text: (content) => TextContentComment(content.text),
-        image: (_) => const SizedBox(),
-      ),
-      loading: CommentLoading.new,
-      error: (_, __) => const SizedBox(),
+    return content.map(
+      text: (content) => TextContentComment(content.text),
+      image: (_) => const SizedBox(),
     );
   }
 }

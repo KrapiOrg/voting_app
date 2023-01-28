@@ -33,7 +33,7 @@ class NewPostButton extends StatelessWidget {
         onPressed: () {
           showDialog(
             context: context,
-            builder: (context) => NewPostDialog(ownerId: candidate.identity),
+            builder: (context) => NewPostDialog(ownerId: candidate.id),
           );
         },
       ),

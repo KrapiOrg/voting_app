@@ -40,7 +40,7 @@ class CommentWidget extends HookConsumerWidget {
                     CommentAvatar(owner: owner),
                     CommentOwner(owner: owner),
                     const Spacer(),
-                    if (loggedInUser.identity == comment.ownerId) DeleteCommentButton(comment: comment),
+                    if (loggedInUser.id == comment.ownerId) DeleteCommentButton(comment: comment),
                   ],
                 );
               },
@@ -48,10 +48,9 @@ class CommentWidget extends HookConsumerWidget {
               error: (_, __) => const SizedBox(),
             ),
           ),
-          CommentContentWidget(commentId: comment.id)
+          CommentContentWidget(content: comment.content)
         ],
       ),
     );
   }
 }
-

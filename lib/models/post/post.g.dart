@@ -7,13 +7,17 @@ part of 'post.dart';
 // **************************************************************************
 
 _$_KPost _$$_KPostFromJson(Map<String, dynamic> json) => _$_KPost(
-      id: json['id'] as String,
+      id: json['id'] as String?,
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
       ownerId: json['owner_id'] as String,
-      timestamp: DateTime.parse(json['timestamp'] as String),
+      content: KContent.fromJson(json['content'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_KPostToJson(_$_KPost instance) => <String, dynamic>{
       'id': instance.id,
+      'created': instance.created?.toIso8601String(),
       'owner_id': instance.ownerId,
-      'timestamp': instance.timestamp.toIso8601String(),
+      'content': instance.content.toJson(),
     };

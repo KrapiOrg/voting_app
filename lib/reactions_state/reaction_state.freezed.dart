@@ -17,23 +17,23 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ReactionState {
   bool get isLiked => throw _privateConstructorUsedError;
-  int get count => throw _privateConstructorUsedError;
+  String? get reactionId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLiked, int count) loading,
-    required TResult Function(bool isLiked, int count) data,
+    required TResult Function(bool isLiked, String? reactionId) loading,
+    required TResult Function(bool isLiked, String? reactionId) data,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isLiked, int count)? loading,
-    TResult? Function(bool isLiked, int count)? data,
+    TResult? Function(bool isLiked, String? reactionId)? loading,
+    TResult? Function(bool isLiked, String? reactionId)? data,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLiked, int count)? loading,
-    TResult Function(bool isLiked, int count)? data,
+    TResult Function(bool isLiked, String? reactionId)? loading,
+    TResult Function(bool isLiked, String? reactionId)? data,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -68,7 +68,7 @@ abstract class $ReactionStateCopyWith<$Res> {
           ReactionState value, $Res Function(ReactionState) then) =
       _$ReactionStateCopyWithImpl<$Res, ReactionState>;
   @useResult
-  $Res call({bool isLiked, int count});
+  $Res call({bool isLiked, String? reactionId});
 }
 
 /// @nodoc
@@ -85,17 +85,17 @@ class _$ReactionStateCopyWithImpl<$Res, $Val extends ReactionState>
   @override
   $Res call({
     Object? isLiked = null,
-    Object? count = null,
+    Object? reactionId = freezed,
   }) {
     return _then(_value.copyWith(
       isLiked: null == isLiked
           ? _value.isLiked
           : isLiked // ignore: cast_nullable_to_non_nullable
               as bool,
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
+      reactionId: freezed == reactionId
+          ? _value.reactionId
+          : reactionId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -108,7 +108,7 @@ abstract class _$$_ReactionStateLoadingCopyWith<$Res>
       __$$_ReactionStateLoadingCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLiked, int count});
+  $Res call({bool isLiked, String? reactionId});
 }
 
 /// @nodoc
@@ -123,17 +123,17 @@ class __$$_ReactionStateLoadingCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLiked = null,
-    Object? count = null,
+    Object? reactionId = freezed,
   }) {
     return _then(_$_ReactionStateLoading(
       isLiked: null == isLiked
           ? _value.isLiked
           : isLiked // ignore: cast_nullable_to_non_nullable
               as bool,
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
+      reactionId: freezed == reactionId
+          ? _value.reactionId
+          : reactionId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -141,18 +141,18 @@ class __$$_ReactionStateLoadingCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ReactionStateLoading implements _ReactionStateLoading {
-  const _$_ReactionStateLoading({this.isLiked = false, this.count = 0});
+  const _$_ReactionStateLoading({this.isLiked = false, this.reactionId = ''});
 
   @override
   @JsonKey()
   final bool isLiked;
   @override
   @JsonKey()
-  final int count;
+  final String? reactionId;
 
   @override
   String toString() {
-    return 'ReactionState.loading(isLiked: $isLiked, count: $count)';
+    return 'ReactionState.loading(isLiked: $isLiked, reactionId: $reactionId)';
   }
 
   @override
@@ -161,11 +161,12 @@ class _$_ReactionStateLoading implements _ReactionStateLoading {
         (other.runtimeType == runtimeType &&
             other is _$_ReactionStateLoading &&
             (identical(other.isLiked, isLiked) || other.isLiked == isLiked) &&
-            (identical(other.count, count) || other.count == count));
+            (identical(other.reactionId, reactionId) ||
+                other.reactionId == reactionId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLiked, count);
+  int get hashCode => Object.hash(runtimeType, isLiked, reactionId);
 
   @JsonKey(ignore: true)
   @override
@@ -177,30 +178,30 @@ class _$_ReactionStateLoading implements _ReactionStateLoading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLiked, int count) loading,
-    required TResult Function(bool isLiked, int count) data,
+    required TResult Function(bool isLiked, String? reactionId) loading,
+    required TResult Function(bool isLiked, String? reactionId) data,
   }) {
-    return loading(isLiked, count);
+    return loading(isLiked, reactionId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isLiked, int count)? loading,
-    TResult? Function(bool isLiked, int count)? data,
+    TResult? Function(bool isLiked, String? reactionId)? loading,
+    TResult? Function(bool isLiked, String? reactionId)? data,
   }) {
-    return loading?.call(isLiked, count);
+    return loading?.call(isLiked, reactionId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLiked, int count)? loading,
-    TResult Function(bool isLiked, int count)? data,
+    TResult Function(bool isLiked, String? reactionId)? loading,
+    TResult Function(bool isLiked, String? reactionId)? data,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(isLiked, count);
+      return loading(isLiked, reactionId);
     }
     return orElse();
   }
@@ -238,13 +239,13 @@ class _$_ReactionStateLoading implements _ReactionStateLoading {
 }
 
 abstract class _ReactionStateLoading implements ReactionState {
-  const factory _ReactionStateLoading({final bool isLiked, final int count}) =
-      _$_ReactionStateLoading;
+  const factory _ReactionStateLoading(
+      {final bool isLiked, final String? reactionId}) = _$_ReactionStateLoading;
 
   @override
   bool get isLiked;
   @override
-  int get count;
+  String? get reactionId;
   @override
   @JsonKey(ignore: true)
   _$$_ReactionStateLoadingCopyWith<_$_ReactionStateLoading> get copyWith =>
@@ -259,7 +260,7 @@ abstract class _$$_ReactionStateDataCopyWith<$Res>
       __$$_ReactionStateDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLiked, int count});
+  $Res call({bool isLiked, String? reactionId});
 }
 
 /// @nodoc
@@ -274,17 +275,17 @@ class __$$_ReactionStateDataCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLiked = null,
-    Object? count = null,
+    Object? reactionId = freezed,
   }) {
     return _then(_$_ReactionStateData(
       null == isLiked
           ? _value.isLiked
           : isLiked // ignore: cast_nullable_to_non_nullable
               as bool,
-      null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
+      freezed == reactionId
+          ? _value.reactionId
+          : reactionId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -292,16 +293,16 @@ class __$$_ReactionStateDataCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ReactionStateData implements _ReactionStateData {
-  const _$_ReactionStateData(this.isLiked, this.count);
+  const _$_ReactionStateData(this.isLiked, this.reactionId);
 
   @override
   final bool isLiked;
   @override
-  final int count;
+  final String? reactionId;
 
   @override
   String toString() {
-    return 'ReactionState.data(isLiked: $isLiked, count: $count)';
+    return 'ReactionState.data(isLiked: $isLiked, reactionId: $reactionId)';
   }
 
   @override
@@ -310,11 +311,12 @@ class _$_ReactionStateData implements _ReactionStateData {
         (other.runtimeType == runtimeType &&
             other is _$_ReactionStateData &&
             (identical(other.isLiked, isLiked) || other.isLiked == isLiked) &&
-            (identical(other.count, count) || other.count == count));
+            (identical(other.reactionId, reactionId) ||
+                other.reactionId == reactionId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLiked, count);
+  int get hashCode => Object.hash(runtimeType, isLiked, reactionId);
 
   @JsonKey(ignore: true)
   @override
@@ -326,30 +328,30 @@ class _$_ReactionStateData implements _ReactionStateData {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLiked, int count) loading,
-    required TResult Function(bool isLiked, int count) data,
+    required TResult Function(bool isLiked, String? reactionId) loading,
+    required TResult Function(bool isLiked, String? reactionId) data,
   }) {
-    return data(isLiked, count);
+    return data(isLiked, reactionId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isLiked, int count)? loading,
-    TResult? Function(bool isLiked, int count)? data,
+    TResult? Function(bool isLiked, String? reactionId)? loading,
+    TResult? Function(bool isLiked, String? reactionId)? data,
   }) {
-    return data?.call(isLiked, count);
+    return data?.call(isLiked, reactionId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLiked, int count)? loading,
-    TResult Function(bool isLiked, int count)? data,
+    TResult Function(bool isLiked, String? reactionId)? loading,
+    TResult Function(bool isLiked, String? reactionId)? data,
     required TResult orElse(),
   }) {
     if (data != null) {
-      return data(isLiked, count);
+      return data(isLiked, reactionId);
     }
     return orElse();
   }
@@ -387,13 +389,13 @@ class _$_ReactionStateData implements _ReactionStateData {
 }
 
 abstract class _ReactionStateData implements ReactionState {
-  const factory _ReactionStateData(final bool isLiked, final int count) =
-      _$_ReactionStateData;
+  const factory _ReactionStateData(
+      final bool isLiked, final String? reactionId) = _$_ReactionStateData;
 
   @override
   bool get isLiked;
   @override
-  int get count;
+  String? get reactionId;
   @override
   @JsonKey(ignore: true)
   _$$_ReactionStateDataCopyWith<_$_ReactionStateData> get copyWith =>
