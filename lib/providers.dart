@@ -30,4 +30,18 @@ final candidateDetailsProvider = FutureProvider.autoDispose.family<CandidateDeta
   },
 );
 
+final userAvatarProvider = FutureProvider.autoDispose.family<String, String>(
+  (ref, userId) async {
+    final db = ref.watch(dbProvider);
+
+    final record = await db.collection('users').getOne(userId);
+    final filename = record.getStringValue('profile_picture');
+    final link = db.getFileUrl(record, filename).toString();
+    if (link.isEmpty) {
+      return 'https://picsum.photos/id/545/1920/600';
+    }
+    return link;
+  },
+);
+
 final dbProvider = Provider((_) => PocketBase('http://127.0.0.1:8090'));

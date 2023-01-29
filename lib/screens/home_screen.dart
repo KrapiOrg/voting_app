@@ -33,7 +33,6 @@ class HomeScreen extends ConsumerWidget {
                 NamedAvatar(
                   user: user,
                   radius: 200.r,
-                  iconSize: 300.r,
                   fontSize: 75.sp,
                 ),
                 UserDetailsWidget(

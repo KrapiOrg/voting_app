@@ -14,3 +14,18 @@ final campaignProvider = FutureProvider.autoDispose.family<KCampaign, String>(
     }
   },
 );
+final headerBackgroundProvider = FutureProvider.autoDispose.family<String, String>(
+  (ref, campaignId) async {
+    await Future.delayed(const Duration(seconds: 1));
+    final db = ref.watch(dbProvider);
+    final record = await db.collection('campaigns').getOne(campaignId);
+    final fileName = record.getStringValue('campaign_background');
+
+    if (fileName.isEmpty) {
+      return 'https://picsum.photos/id/545/1920/600';
+    }
+
+    final url = db.getFileUrl(record, fileName);
+    return url.toString();
+  },
+);

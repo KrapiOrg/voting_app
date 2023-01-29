@@ -9,22 +9,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:mime/mime.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:voting_app/providers.dart';
-
-final headerBackgroundProvider = FutureProvider.autoDispose.family<String, String>(
-  (ref, campaignId) async {
-    await Future.delayed(const Duration(seconds: 1));
-    final db = ref.watch(dbProvider);
-    final record = await db.collection('campaigns').getOne(campaignId);
-    final fileName = record.getStringValue('campaign_background');
-
-    if (fileName.isEmpty) {
-      return 'https://picsum.photos/id/545/1920/600';
-    }
-
-    final url = db.getFileUrl(record, fileName);
-    return url.toString();
-  },
-);
+import 'package:voting_app/screens/campaign_screen/campaign_providers.dart';
 
 class CampaignHeaderBackground extends ConsumerWidget {
   final String campaignId;
@@ -78,12 +63,14 @@ class CampaignHeaderBackground extends ConsumerWidget {
           duration: 500.ms,
           child: headerBackgroundFuture.when(
             data: (link) {
-              return Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
-                  image: DecorationImage(
-                    image: CachedNetworkImageProvider(link),
-                    fit: BoxFit.cover,
+              return SizedBox.expand(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.r),
+                    image: DecorationImage(
+                      image: CachedNetworkImageProvider(link),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               );
@@ -97,7 +84,11 @@ class CampaignHeaderBackground extends ConsumerWidget {
                 ),
               );
             },
-            error: (_, __) => const SizedBox(),
+            error: (_, __) {
+              print(_);
+              print(__);
+              return const SizedBox();
+            },
           ),
         ),
       ),

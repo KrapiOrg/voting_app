@@ -52,7 +52,6 @@ class CandidateListScreen extends ConsumerWidget {
                       NamedAvatar(
                         user: candidate,
                         radius: 200.r,
-                        iconSize: 300.r,
                         fontSize: 75.sp,
                       ),
                       KTextButton(
