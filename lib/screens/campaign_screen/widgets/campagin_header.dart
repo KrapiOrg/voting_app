@@ -35,9 +35,9 @@ class CampaginHeader extends ConsumerWidget {
         SizedBox(
           height: 0.30.sh,
           child: Stack(
-            children: const [
-              CampaignHeaderBackground(),
-              CampaignHeaderAvatar(),
+            children:  [
+              CampaignHeaderBackground(campaignId: campaign.id),
+              const CampaignHeaderAvatar(),
             ],
           ),
         ),
@@ -61,4 +61,3 @@ class CampaginHeader extends ConsumerWidget {
     );
   }
 }
-

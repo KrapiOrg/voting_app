@@ -6,6 +6,7 @@ part 'campagin.freezed.dart';
 @freezed
 class KCampaign with _$KCampaign {
   const factory KCampaign(
+    String id,
     String candidateId,
     String slogan,
     DateTime created,
