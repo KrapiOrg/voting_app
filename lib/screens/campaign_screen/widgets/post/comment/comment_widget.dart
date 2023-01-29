@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:voting_app/auth/auth_manager.dart';
@@ -31,7 +31,7 @@ class CommentWidget extends HookConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AnimatedSwitcher(
-            duration: 500.ms,
+            duration: const Duration(milliseconds: 500),
             child: ownerFuture.when(
               data: (owner) {
                 return Row(

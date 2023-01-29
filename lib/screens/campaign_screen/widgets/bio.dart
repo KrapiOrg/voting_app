@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,7 +17,7 @@ class CandidateBio extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AnimatedSwitcher(
-      duration: 500.ms,
+      duration: const Duration(milliseconds: 500),
       child: detailsFuture.maybeWhen(
         data: (details) => SizedBox(
           width: 0.4.sw,

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
@@ -60,7 +60,7 @@ class CampaignHeaderBackground extends ConsumerWidget {
       child: SizedBox(
         height: 450.h,
         child: AnimatedSwitcher(
-          duration: 500.ms,
+          duration: const Duration(milliseconds: 500),
           child: headerBackgroundFuture.when(
             data: (link) {
               return SizedBox.expand(

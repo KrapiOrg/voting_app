@@ -9,7 +9,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
   flutter_svg: ^1.1.6
   google_fonts: ^3.0.1
   file_picker: ^5.2.5
@@ -25,20 +24,15 @@ dependencies:
   flutter_secure_storage: ^7.0.1
   flutter_screenutil: ^5.6.0
   auto_size_text: ^3.0.0
-  dartz: ^0.10.1
   sliver_tools: ^0.2.8
   readmore: ^2.2.0
-  faker: ^2.1.0
   intl: ^0.17.0
   like_button: ^2.0.5
   shimmer: ^2.0.0
-  uuid: ^3.0.7
   flutter_quill: ^6.3.0
   infinite_scroll_pagination: ^3.2.0
-  flutter_animate: ^3.0.0
   pocketbase: ^0.7.1+1
   rxdart: ^0.27.7
-  synchronized: ^3.0.1
   http: ^0.13.5
   mime: ^1.0.4
   http_parser: ^4.0.2

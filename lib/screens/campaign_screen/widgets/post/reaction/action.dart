@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:like_button/like_button.dart';
 
-
 import 'recation_providers.dart';
 
 class ReactionAction extends ConsumerWidget {
@@ -19,7 +18,10 @@ class ReactionAction extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final postReactionsFuture = ref.watch(
       postReactionProvider(
-        ReactionFamily(ownerId, postId),
+        ReactionFamily(
+          ownerId: ownerId,
+          postId: postId,
+        ),
       ),
     );
     final isLiked = postReactionsFuture.map(
@@ -39,7 +41,14 @@ class ReactionAction extends ConsumerWidget {
         isLiked: isLiked,
         onTap: isLiked != null
             ? (isLiked) async {
-                final notifier = ref.read(postReactionProvider(ReactionFamily(ownerId, postId)).notifier);
+                final notifier = ref.read(
+                  postReactionProvider(
+                    ReactionFamily(
+                      ownerId: ownerId,
+                      postId: postId,
+                    ),
+                  ).notifier,
+                );
                 return await notifier.setLikeState(isLiked);
               }
             : null,

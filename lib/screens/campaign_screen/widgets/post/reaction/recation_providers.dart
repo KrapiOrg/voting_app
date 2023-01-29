@@ -1,7 +1,7 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketbase/pocketbase.dart';
 import 'package:rxdart/rxdart.dart';
+
 import 'package:voting_app/models/reaction/reaction.dart';
 import 'package:voting_app/providers.dart';
 import 'package:voting_app/reactions_state/reaction_state.dart';
@@ -46,7 +46,25 @@ final reactionCountProvider = StreamProvider.family<int, String>(
   },
 );
 
-typedef ReactionFamily = Tuple2<String, String>;
+class ReactionFamily {
+  final String ownerId;
+  final String postId;
+
+  const ReactionFamily({
+    required this.ownerId,
+    required this.postId,
+  });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is ReactionFamily && other.ownerId == ownerId && other.postId == postId;
+  }
+
+  @override
+  int get hashCode => ownerId.hashCode ^ postId.hashCode;
+}
 
 class PostReactionNotifier extends StateNotifier<ReactionState> {
   final Ref ref;
@@ -143,7 +161,7 @@ final postReactionProvider =
     StateNotifierProvider.autoDispose.family<PostReactionNotifier, ReactionState, ReactionFamily>(
   (ref, family) => PostReactionNotifier(
     ref: ref,
-    ownerId: family.value1,
-    postId: family.value2,
+    ownerId: family.ownerId,
+    postId: family.postId,
   ),
 );

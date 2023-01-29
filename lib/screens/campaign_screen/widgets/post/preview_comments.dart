@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,7 +20,7 @@ class PreviewComments extends HookConsumerWidget {
     final comments = ref.watch(previewCommentsProvider(postId));
 
     return AnimatedSwitcher(
-      duration: 500.ms,
+      duration: const Duration(milliseconds: 500),
       child: comments.when(
         data: (comments) {
           if (comments.isEmpty) {
