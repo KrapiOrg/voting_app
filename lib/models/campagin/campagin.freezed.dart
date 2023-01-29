@@ -20,7 +20,7 @@ KCampaign _$KCampaignFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$KCampaign {
-  String get id => throw _privateConstructorUsedError;
+  String get candidateId => throw _privateConstructorUsedError;
   String get slogan => throw _privateConstructorUsedError;
   DateTime get created => throw _privateConstructorUsedError;
 
@@ -35,7 +35,7 @@ abstract class $KCampaignCopyWith<$Res> {
   factory $KCampaignCopyWith(KCampaign value, $Res Function(KCampaign) then) =
       _$KCampaignCopyWithImpl<$Res, KCampaign>;
   @useResult
-  $Res call({String id, String slogan, DateTime created});
+  $Res call({String candidateId, String slogan, DateTime created});
 }
 
 /// @nodoc
@@ -51,14 +51,14 @@ class _$KCampaignCopyWithImpl<$Res, $Val extends KCampaign>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? candidateId = null,
     Object? slogan = null,
     Object? created = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      candidateId: null == candidateId
+          ? _value.candidateId
+          : candidateId // ignore: cast_nullable_to_non_nullable
               as String,
       slogan: null == slogan
           ? _value.slogan
@@ -79,7 +79,7 @@ abstract class _$$_KCampaignCopyWith<$Res> implements $KCampaignCopyWith<$Res> {
       __$$_KCampaignCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String slogan, DateTime created});
+  $Res call({String candidateId, String slogan, DateTime created});
 }
 
 /// @nodoc
@@ -93,14 +93,14 @@ class __$$_KCampaignCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? candidateId = null,
     Object? slogan = null,
     Object? created = null,
   }) {
     return _then(_$_KCampaign(
-      null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      null == candidateId
+          ? _value.candidateId
+          : candidateId // ignore: cast_nullable_to_non_nullable
               as String,
       null == slogan
           ? _value.slogan
@@ -117,13 +117,13 @@ class __$$_KCampaignCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_KCampaign implements _KCampaign {
-  const _$_KCampaign(this.id, this.slogan, this.created);
+  const _$_KCampaign(this.candidateId, this.slogan, this.created);
 
   factory _$_KCampaign.fromJson(Map<String, dynamic> json) =>
       _$$_KCampaignFromJson(json);
 
   @override
-  final String id;
+  final String candidateId;
   @override
   final String slogan;
   @override
@@ -131,7 +131,7 @@ class _$_KCampaign implements _KCampaign {
 
   @override
   String toString() {
-    return 'KCampaign(id: $id, slogan: $slogan, created: $created)';
+    return 'KCampaign(candidateId: $candidateId, slogan: $slogan, created: $created)';
   }
 
   @override
@@ -139,14 +139,15 @@ class _$_KCampaign implements _KCampaign {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_KCampaign &&
-            (identical(other.id, id) || other.id == id) &&
+            (identical(other.candidateId, candidateId) ||
+                other.candidateId == candidateId) &&
             (identical(other.slogan, slogan) || other.slogan == slogan) &&
             (identical(other.created, created) || other.created == created));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, slogan, created);
+  int get hashCode => Object.hash(runtimeType, candidateId, slogan, created);
 
   @JsonKey(ignore: true)
   @override
@@ -163,15 +164,14 @@ class _$_KCampaign implements _KCampaign {
 }
 
 abstract class _KCampaign implements KCampaign {
-  const factory _KCampaign(
-          final String id, final String slogan, final DateTime created) =
-      _$_KCampaign;
+  const factory _KCampaign(final String candidateId, final String slogan,
+      final DateTime created) = _$_KCampaign;
 
   factory _KCampaign.fromJson(Map<String, dynamic> json) =
       _$_KCampaign.fromJson;
 
   @override
-  String get id;
+  String get candidateId;
   @override
   String get slogan;
   @override

@@ -42,15 +42,15 @@ class CampaginPost extends ConsumerWidget {
                 children: [
                   PostTemporalDetails(timestamp: post.created!),
                   const Spacer(),
-                  if (loggedInUser.id == post.ownerId) DeletePostButton(post: post),
+                  if (loggedInUser.id == post.parentId) DeletePostButton(post: post),
                 ],
               ),
               const Divider(),
-              PostStatistics(ownerId: post.ownerId, postId: post.id!),
+              PostStatistics(ownerId: post.parentId, postId: post.id!),
               const Divider(),
               PostActions(
                 post: post,
-                ownerId: post.ownerId,
+                ownerId: post.parentId,
                 showViewCommentsAction: showViewCommentsAction,
               ),
               if (showPreviewComments) const Divider(),

@@ -17,7 +17,7 @@ final postsListProvider = Provider.autoDispose.family<DBPaginator<KPost>, DBPagi
     final controller = DBPaginator<KPost>(
       ref,
       'posts',
-      family.ownerId,
+      family.parentId,
       family.fromJson,
     );
     ref.onDispose(controller.dispose);

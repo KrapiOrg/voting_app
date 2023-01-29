@@ -25,7 +25,7 @@ class CampaignPostsList extends ConsumerWidget {
     final posts = ref.watch(
       postsListProvider(
         DBPaginatorFamily<KPost>(
-          campaign.id,
+          campaign.candidateId,
           KPost.fromJson,
         ),
       ),
@@ -34,7 +34,7 @@ class CampaignPostsList extends ConsumerWidget {
 
     final noPostsWidget = Center(
       child: Text(
-        campaign.id == loggedInUser.id ? 'You have no posts!' : 'Candidate has no new posts!',
+        campaign.candidateId == loggedInUser.id ? 'You have no posts!' : 'Candidate has no new posts!',
         style: GoogleFonts.poppins(
           fontSize: 50.sp,
         ),

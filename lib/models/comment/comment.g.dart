@@ -9,8 +9,8 @@ part of 'comment.dart';
 _$_CommentText _$$_CommentTextFromJson(Map<String, dynamic> json) =>
     _$_CommentText(
       id: json['id'] as String?,
-      ownerId: json['owner_id'] as String,
-      postId: json['post_id'] as String,
+      commenterId: json['commenter_id'] as String,
+      parentId: json['parent_id'] as String,
       parentType: $enumDecode(_$CommentParentTypeEnumMap, json['parent_type']),
       content: KContent.fromJson(json['content'] as Map<String, dynamic>),
       parentCommentId: json['parent_comment_id'] as String?,
@@ -19,8 +19,8 @@ _$_CommentText _$$_CommentTextFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_CommentTextToJson(_$_CommentText instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'owner_id': instance.ownerId,
-      'post_id': instance.postId,
+      'commenter_id': instance.commenterId,
+      'parent_id': instance.parentId,
       'parent_type': _$CommentParentTypeEnumMap[instance.parentType]!,
       'content': instance.content.toJson(),
       'parent_comment_id': instance.parentCommentId,

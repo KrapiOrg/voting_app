@@ -22,7 +22,7 @@ KPost _$KPostFromJson(Map<String, dynamic> json) {
 mixin _$KPost {
   String? get id => throw _privateConstructorUsedError;
   DateTime? get created => throw _privateConstructorUsedError;
-  String get ownerId => throw _privateConstructorUsedError;
+  String get parentId => throw _privateConstructorUsedError;
   KContent get content => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $KPostCopyWith<$Res> {
   factory $KPostCopyWith(KPost value, $Res Function(KPost) then) =
       _$KPostCopyWithImpl<$Res, KPost>;
   @useResult
-  $Res call({String? id, DateTime? created, String ownerId, KContent content});
+  $Res call({String? id, DateTime? created, String parentId, KContent content});
 
   $KContentCopyWith<$Res> get content;
 }
@@ -55,7 +55,7 @@ class _$KPostCopyWithImpl<$Res, $Val extends KPost>
   $Res call({
     Object? id = freezed,
     Object? created = freezed,
-    Object? ownerId = null,
+    Object? parentId = null,
     Object? content = null,
   }) {
     return _then(_value.copyWith(
@@ -67,9 +67,9 @@ class _$KPostCopyWithImpl<$Res, $Val extends KPost>
           ? _value.created
           : created // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      ownerId: null == ownerId
-          ? _value.ownerId
-          : ownerId // ignore: cast_nullable_to_non_nullable
+      parentId: null == parentId
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
               as String,
       content: null == content
           ? _value.content
@@ -93,7 +93,7 @@ abstract class _$$_KPostCopyWith<$Res> implements $KPostCopyWith<$Res> {
       __$$_KPostCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? id, DateTime? created, String ownerId, KContent content});
+  $Res call({String? id, DateTime? created, String parentId, KContent content});
 
   @override
   $KContentCopyWith<$Res> get content;
@@ -110,7 +110,7 @@ class __$$_KPostCopyWithImpl<$Res> extends _$KPostCopyWithImpl<$Res, _$_KPost>
   $Res call({
     Object? id = freezed,
     Object? created = freezed,
-    Object? ownerId = null,
+    Object? parentId = null,
     Object? content = null,
   }) {
     return _then(_$_KPost(
@@ -122,9 +122,9 @@ class __$$_KPostCopyWithImpl<$Res> extends _$KPostCopyWithImpl<$Res, _$_KPost>
           ? _value.created
           : created // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      ownerId: null == ownerId
-          ? _value.ownerId
-          : ownerId // ignore: cast_nullable_to_non_nullable
+      parentId: null == parentId
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
               as String,
       content: null == content
           ? _value.content
@@ -138,7 +138,7 @@ class __$$_KPostCopyWithImpl<$Res> extends _$KPostCopyWithImpl<$Res, _$_KPost>
 @JsonSerializable()
 class _$_KPost implements _KPost {
   const _$_KPost(
-      {this.id, this.created, required this.ownerId, required this.content});
+      {this.id, this.created, required this.parentId, required this.content});
 
   factory _$_KPost.fromJson(Map<String, dynamic> json) =>
       _$$_KPostFromJson(json);
@@ -148,13 +148,13 @@ class _$_KPost implements _KPost {
   @override
   final DateTime? created;
   @override
-  final String ownerId;
+  final String parentId;
   @override
   final KContent content;
 
   @override
   String toString() {
-    return 'KPost(id: $id, created: $created, ownerId: $ownerId, content: $content)';
+    return 'KPost(id: $id, created: $created, parentId: $parentId, content: $content)';
   }
 
   @override
@@ -164,13 +164,14 @@ class _$_KPost implements _KPost {
             other is _$_KPost &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.created, created) || other.created == created) &&
-            (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
+            (identical(other.parentId, parentId) ||
+                other.parentId == parentId) &&
             (identical(other.content, content) || other.content == content));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, created, ownerId, content);
+  int get hashCode => Object.hash(runtimeType, id, created, parentId, content);
 
   @JsonKey(ignore: true)
   @override
@@ -190,7 +191,7 @@ abstract class _KPost implements KPost {
   const factory _KPost(
       {final String? id,
       final DateTime? created,
-      required final String ownerId,
+      required final String parentId,
       required final KContent content}) = _$_KPost;
 
   factory _KPost.fromJson(Map<String, dynamic> json) = _$_KPost.fromJson;
@@ -200,7 +201,7 @@ abstract class _KPost implements KPost {
   @override
   DateTime? get created;
   @override
-  String get ownerId;
+  String get parentId;
   @override
   KContent get content;
   @override

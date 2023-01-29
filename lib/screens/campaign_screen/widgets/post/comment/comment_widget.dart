@@ -23,7 +23,7 @@ class CommentWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     useAutomaticKeepAlive();
-    final ownerFuture = ref.watch(userFromIdProvider(comment.ownerId));
+    final ownerFuture = ref.watch(userFromIdProvider(comment.commenterId));
     final loggedInUser = (ref.watch(authManagerProvider) as AuthStateSignedIn).user;
 
     return Card(
@@ -40,7 +40,7 @@ class CommentWidget extends HookConsumerWidget {
                     CommentAvatar(owner: owner),
                     CommentOwner(owner: owner),
                     const Spacer(),
-                    if (loggedInUser.id == comment.ownerId) DeleteCommentButton(comment: comment),
+                    if (loggedInUser.id == comment.commenterId) DeleteCommentButton(comment: comment),
                   ],
                 );
               },

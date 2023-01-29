@@ -6,7 +6,7 @@ import 'package:voting_app/models/reaction/reaction.dart';
 import 'package:voting_app/providers.dart';
 import 'package:voting_app/reactions_state/reaction_state.dart';
 
-final reactionCountProvider = StreamProvider.autoDispose.family<int, String>(
+final reactionCountProvider = StreamProvider.family<int, String>(
   (ref, postId) async* {
     final subject = BehaviorSubject.seeded(0);
     final db = ref.watch(dbProvider);
@@ -26,6 +26,9 @@ final reactionCountProvider = StreamProvider.autoDispose.family<int, String>(
         .subscribe(
       '*',
       (e) {
+        final reaction = KReaction.fromJson(e.record!.toJson());
+        if (reaction.postId != postId) return;
+
         if (e.action == 'create') {
           subject.add(subject.value + 1);
         } else {

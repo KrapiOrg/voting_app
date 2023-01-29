@@ -148,8 +148,8 @@ class _NewCommentDialogState extends ConsumerState<NewCommentDialog> {
                       final db = ref.watch(dbProvider);
 
                       final comment = KComment(
-                        postId: widget.postId,
-                        ownerId: authState.user.id,
+                        commenterId: authState.user.id,
+                        parentId: widget.postId,
                         parentType: CommentParentType.post,
                         content: KContent.text(
                           text: controller.document.toPlainText(),

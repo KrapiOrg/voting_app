@@ -13,8 +13,8 @@ enum CommentParentType {
 class KComment with _$KComment {
   const factory KComment({
     String? id,
-    required String ownerId,
-    required String postId,
+    required String commenterId,
+    required String parentId,
     required CommentParentType parentType,
     required KContent content,
     String? parentCommentId,

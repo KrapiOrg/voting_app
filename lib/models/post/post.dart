@@ -9,7 +9,7 @@ class KPost with _$KPost {
   const factory KPost({
     String? id,
     DateTime? created,
-    required String ownerId,
+    required String parentId,
     required KContent content,
   }) = _KPost;
   factory KPost.fromJson(Map<String, dynamic> json) => _$KPostFromJson(json);

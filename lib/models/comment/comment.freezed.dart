@@ -21,8 +21,8 @@ KComment _$KCommentFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$KComment {
   String? get id => throw _privateConstructorUsedError;
-  String get ownerId => throw _privateConstructorUsedError;
-  String get postId => throw _privateConstructorUsedError;
+  String get commenterId => throw _privateConstructorUsedError;
+  String get parentId => throw _privateConstructorUsedError;
   CommentParentType get parentType => throw _privateConstructorUsedError;
   KContent get content => throw _privateConstructorUsedError;
   String? get parentCommentId => throw _privateConstructorUsedError;
@@ -40,8 +40,8 @@ abstract class $KCommentCopyWith<$Res> {
   @useResult
   $Res call(
       {String? id,
-      String ownerId,
-      String postId,
+      String commenterId,
+      String parentId,
       CommentParentType parentType,
       KContent content,
       String? parentCommentId});
@@ -63,8 +63,8 @@ class _$KCommentCopyWithImpl<$Res, $Val extends KComment>
   @override
   $Res call({
     Object? id = freezed,
-    Object? ownerId = null,
-    Object? postId = null,
+    Object? commenterId = null,
+    Object? parentId = null,
     Object? parentType = null,
     Object? content = null,
     Object? parentCommentId = freezed,
@@ -74,13 +74,13 @@ class _$KCommentCopyWithImpl<$Res, $Val extends KComment>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      ownerId: null == ownerId
-          ? _value.ownerId
-          : ownerId // ignore: cast_nullable_to_non_nullable
+      commenterId: null == commenterId
+          ? _value.commenterId
+          : commenterId // ignore: cast_nullable_to_non_nullable
               as String,
-      postId: null == postId
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
+      parentId: null == parentId
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
               as String,
       parentType: null == parentType
           ? _value.parentType
@@ -116,8 +116,8 @@ abstract class _$$_CommentTextCopyWith<$Res>
   @useResult
   $Res call(
       {String? id,
-      String ownerId,
-      String postId,
+      String commenterId,
+      String parentId,
       CommentParentType parentType,
       KContent content,
       String? parentCommentId});
@@ -138,8 +138,8 @@ class __$$_CommentTextCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? ownerId = null,
-    Object? postId = null,
+    Object? commenterId = null,
+    Object? parentId = null,
     Object? parentType = null,
     Object? content = null,
     Object? parentCommentId = freezed,
@@ -149,13 +149,13 @@ class __$$_CommentTextCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      ownerId: null == ownerId
-          ? _value.ownerId
-          : ownerId // ignore: cast_nullable_to_non_nullable
+      commenterId: null == commenterId
+          ? _value.commenterId
+          : commenterId // ignore: cast_nullable_to_non_nullable
               as String,
-      postId: null == postId
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
+      parentId: null == parentId
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
               as String,
       parentType: null == parentType
           ? _value.parentType
@@ -178,8 +178,8 @@ class __$$_CommentTextCopyWithImpl<$Res>
 class _$_CommentText implements _CommentText {
   const _$_CommentText(
       {this.id,
-      required this.ownerId,
-      required this.postId,
+      required this.commenterId,
+      required this.parentId,
       required this.parentType,
       required this.content,
       this.parentCommentId});
@@ -190,9 +190,9 @@ class _$_CommentText implements _CommentText {
   @override
   final String? id;
   @override
-  final String ownerId;
+  final String commenterId;
   @override
-  final String postId;
+  final String parentId;
   @override
   final CommentParentType parentType;
   @override
@@ -202,7 +202,7 @@ class _$_CommentText implements _CommentText {
 
   @override
   String toString() {
-    return 'KComment(id: $id, ownerId: $ownerId, postId: $postId, parentType: $parentType, content: $content, parentCommentId: $parentCommentId)';
+    return 'KComment(id: $id, commenterId: $commenterId, parentId: $parentId, parentType: $parentType, content: $content, parentCommentId: $parentCommentId)';
   }
 
   @override
@@ -211,8 +211,10 @@ class _$_CommentText implements _CommentText {
         (other.runtimeType == runtimeType &&
             other is _$_CommentText &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
-            (identical(other.postId, postId) || other.postId == postId) &&
+            (identical(other.commenterId, commenterId) ||
+                other.commenterId == commenterId) &&
+            (identical(other.parentId, parentId) ||
+                other.parentId == parentId) &&
             (identical(other.parentType, parentType) ||
                 other.parentType == parentType) &&
             (identical(other.content, content) || other.content == content) &&
@@ -222,8 +224,8 @@ class _$_CommentText implements _CommentText {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, ownerId, postId, parentType, content, parentCommentId);
+  int get hashCode => Object.hash(runtimeType, id, commenterId, parentId,
+      parentType, content, parentCommentId);
 
   @JsonKey(ignore: true)
   @override
@@ -242,8 +244,8 @@ class _$_CommentText implements _CommentText {
 abstract class _CommentText implements KComment {
   const factory _CommentText(
       {final String? id,
-      required final String ownerId,
-      required final String postId,
+      required final String commenterId,
+      required final String parentId,
       required final CommentParentType parentType,
       required final KContent content,
       final String? parentCommentId}) = _$_CommentText;
@@ -254,9 +256,9 @@ abstract class _CommentText implements KComment {
   @override
   String? get id;
   @override
-  String get ownerId;
+  String get commenterId;
   @override
-  String get postId;
+  String get parentId;
   @override
   CommentParentType get parentType;
   @override

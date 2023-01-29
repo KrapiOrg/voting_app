@@ -68,7 +68,7 @@ class _NewPostDialogState extends ConsumerState<NewPostDialog> {
 
                       final db = ref.watch(dbProvider);
                       final post = KPost(
-                        ownerId: authState.user.id,
+                        parentId: authState.user.id,
                         content: KContent.text(
                           text: controller.document.toPlainText(),
                         ),
